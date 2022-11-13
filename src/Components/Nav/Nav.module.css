@@ -1,0 +1,33 @@
+.nav {
+    grid-area: n;
+    background-color: rgba(30, 33, 210, 0.36);
+    padding: 2px;
+    margin: 5px;
+    padding-left: 20px;
+}
+
+.item a {
+    color: white;
+    text-decoration: none
+}
+
+.item a.activelink {
+    color: gold;
+}
+
+.img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.h1 {
+    color: #3644d9;
+    padding-top: 30px;
+}
+
+.siteBarWrapper {
+    display: inline-block;
+    justify-content: space-between;
+    padding: 5px;
+}
