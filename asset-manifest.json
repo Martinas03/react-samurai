@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-samurai/static/css/main.d3267f00.css",
+    "main.js": "/react-samurai/static/js/main.c7a041fc.js",
+    "index.html": "/react-samurai/index.html",
+    "main.d3267f00.css.map": "/react-samurai/static/css/main.d3267f00.css.map",
+    "main.c7a041fc.js.map": "/react-samurai/static/js/main.c7a041fc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d3267f00.css",
+    "static/js/main.c7a041fc.js"
+  ]
+}
