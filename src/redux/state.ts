@@ -4,13 +4,14 @@ let _rerenderTree = () => {
 
 export type StoreType = {
     _state: StateType
-    rerenderTree: ()=> void
-    getState: ()=> StateType
-    addPost: ()=> void
-    addMessage: (message: string)=> void
-    updateNewPostText: (newText: string)=> void
-    updateNewMessageText: (text: string)=> void
-    subscribe: (observer: ()=> void)=> void
+    rerenderTree: () => void
+    getState: () => StateType
+    addPost: () => void
+    addMessage: (message: string) => void
+    updateNewPostText: (newText: string) => void
+    updateNewMessageText: (text: string) => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action: any)=> void
 }
 
 export type StateType = {
@@ -59,7 +60,7 @@ export type FriendsType = {
 }
 
 let store: StoreType = {
-    rerenderTree () {
+    rerenderTree() {
         console.log('State changed')
     },
     _state: {
@@ -131,7 +132,7 @@ let store: StoreType = {
     getState() {
         return this._state;
     },
-    addPost  () {
+    addPost() {
         let newPoost: PostsType = {
             id: 4,
             message: this._state.profilePage.newPostText,
@@ -141,7 +142,7 @@ let store: StoreType = {
         this.rerenderTree()
     },
 
-    addMessage  (message: string)  {
+    addMessage(message: string) {
         let newMessage: MessagesType = {
             id: 4,
             message: message
@@ -151,17 +152,44 @@ let store: StoreType = {
         this.rerenderTree()
     },
 
-    updateNewPostText  (newText: string)  {
-        this._state.profilePage.newPostText = newText
+    updateNewPostText(newPost: string) {
+        this._state.profilePage.newPostText = newPost
         this.rerenderTree()
     },
 
-    updateNewMessageText (text: string) {
-        this._state.messagesPage.newMessageText = text
+    updateNewMessageText(newMessageText: string) {
+        this._state.messagesPage.newMessageText = newMessageText
         this.rerenderTree()
     },
 
-    subscribe (observer: () => void) {
+    dispatch(action) {
+        if (action === 'ADD-POST') {
+            let newPoost: PostsType = {
+                id: 4,
+                message: this._state.profilePage.newPostText,
+                likeCount: 0
+            }
+            this._state.profilePage.posts.push(newPoost)
+            this.rerenderTree()
+        } else if (action === 'ADD-MESSAGE') {
+            let newMessage: MessagesType = {
+                id: 4,
+                message: action.message
+            }
+            this._state.messagesPage.messages.unshift(newMessage)
+            this._state.profilePage.newPostText = ''
+            this.rerenderTree()
+        } else if (action === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newPost
+            this.rerenderTree()
+        } else if (action === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.messagesPage.newMessageText = action.newMessageText
+            this.rerenderTree()
+        }
+    },
+
+    subscribe
+    (observer: () => void) {
         this.rerenderTree = observer
     }
 }
