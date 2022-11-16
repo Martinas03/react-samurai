@@ -2,6 +2,8 @@ let rerenderTree = () => {
     console.log('State changed')
 }
 
+
+
 export type StateType = {
     messagesPage: MessagePageType
     profilePage: ProfilePageType
@@ -120,7 +122,39 @@ let store = {
     getState() {
         return this._state;
     },
+    addPost  () {
+        let newPoost: PostsType = {
+            id: 4,
+            message: this._state.profilePage.newPostText,
+            likeCount: 0
+        }
+        this._state.profilePage.posts.push(newPoost)
+        this.rerenderTree()
+    },
 
+    addMessage  (message: string)  {
+        let newMessage: MessagesType = {
+            id: 4,
+            message: message
+        }
+        this._state.messagesPage.messages.unshift(newMessage)
+        this._state.profilePage.newPostText = ''
+        this.rerenderTree()
+    },
+
+    updateNewPostText  (newText: string)  {
+        this._state.profilePage.newPostText = newText
+        this.rerenderTree()
+    },
+
+    updateNewMessageText (text: string) {
+        this._state.messagesPage.newMessageText = text
+        this.rerenderTree()
+    },
+
+    subscribe (observer: () => void) {
+        this.rerenderTree = observer
+    }
 }
 
 let state: StateType = {
@@ -225,4 +259,5 @@ export const subscribe = (observer: () => void) => {
     rerenderTree = observer
 }
 
-export default state
+export default store
+// export default state
