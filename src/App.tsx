@@ -8,25 +8,26 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {addMessage, StateType, updateNewMessageText,} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 export type AppPropsType = {
-    state: StateType
-    addPost: ()=> void
-    addMessage: (message: string)=> void
-    updateNewPostText: (text: string)=> void
-    updateNewMessageText:(text: string)=> void
+    store: StoreType
+    // addPost: ()=> void
+    // addMessage: (message: string)=> void
+    // updateNewPostText: (text: string)=> void
+    // updateNewMessageText:(text: string)=> void
 }
 
 const App = (props: AppPropsType) => {
+    let state = props.store.getState()
     return (
         <BrowserRouter>
                 <div className='app-wrapper'>
                     <Header/>
-                    <Nav siteBarBlock={props.state.siteBar}/>
+                    <Nav siteBarBlock={state.siteBar}/>
                     <div className='app-wrapper-content'>
-                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage} addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText}/>}/>
-                            <Route path={'/profile'} render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
+                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={state.messagesPage} addMessage={props.store.addMessage.bind(props.store)} updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}/>}/>
+                            <Route path={'/profile'} render={() => <Profile profilePage={state.profilePage} addPost={props.store.addPost.bind(props.store)} updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
                             <Route path={'/news'} render={() => <News/>}/>
                             <Route path={'/music'} render={() => <Music/>}/>
                             <Route path={'/settings'} render={() => <Settings/>}/>
