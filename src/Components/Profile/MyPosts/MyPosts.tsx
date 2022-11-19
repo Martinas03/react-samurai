@@ -1,15 +1,16 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostsType} from "../../../redux/state";
+import {ActionTypes, addPostActionType, PostsType, updateNewPostTextActionType} from "../../../redux/state";
 
 
 type PostsPropsType = {
     profilePage: PostsType[]
-    addPost: ()=> void
     newPostText: string
-    updateNewPostText: (text: string)=> void
+    dispatch: (action: ActionTypes) => void
 }
+
+
 
 const MyPosts = (props: PostsPropsType) => {
 
@@ -19,14 +20,17 @@ const MyPosts = (props: PostsPropsType) => {
     const message = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        props.addPost()
-        props.updateNewPostText('')
+        props.dispatch(addPostActionType())
+        props.dispatch(updateNewPostTextActionType(''))
+        // props.addPost()
+        // props.updateNewPostText('')
     }
 
     const onChangeHandler = () => {
         // let text = message.current.value
-        if(message.current)
-        props.updateNewPostText(message.current.value)
+        if (message.current)
+            props.dispatch(updateNewPostTextActionType(message.current.value))
+        // props.updateNewPostText(message.current.value)
         console.log(message.current)
     }
 

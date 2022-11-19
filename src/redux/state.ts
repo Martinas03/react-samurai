@@ -11,8 +11,35 @@ export type StoreType = {
     updateNewPostText: (newText: string) => void
     updateNewMessageText: (text: string) => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: any)=> void
+    dispatch: (action: ActionTypes) => void
 }
+
+export type ActionTypes =
+    AddPostPropsType
+    | AddMessagePropsType
+    | UpdateNewPostTextPropsType
+    | UpdateNewMessageTextPropsType
+
+
+type AddPostPropsType = {
+    type: 'ADD-POST'
+}
+
+type AddMessagePropsType = {
+    type: 'ADD-MESSAGE'
+    message: string
+}
+
+type UpdateNewPostTextPropsType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newPost: string
+}
+
+type UpdateNewMessageTextPropsType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessageText: string
+}
+
 
 export type StateType = {
     messagesPage: MessagePageType
@@ -163,7 +190,7 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action === 'ADD-POST') {
+        if (action.type === 'ADD-POST') {
             let newPoost: PostsType = {
                 id: 4,
                 message: this._state.profilePage.newPostText,
@@ -171,7 +198,7 @@ let store: StoreType = {
             }
             this._state.profilePage.posts.push(newPoost)
             this.rerenderTree()
-        } else if (action === 'ADD-MESSAGE') {
+        } else if (action.type === 'ADD-MESSAGE') {
             let newMessage: MessagesType = {
                 id: 4,
                 message: action.message
@@ -179,10 +206,10 @@ let store: StoreType = {
             this._state.messagesPage.messages.unshift(newMessage)
             this._state.profilePage.newPostText = ''
             this.rerenderTree()
-        } else if (action === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newPost
             this.rerenderTree()
-        } else if (action === 'UPDATE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
             this._state.messagesPage.newMessageText = action.newMessageText
             this.rerenderTree()
         }
@@ -193,5 +220,20 @@ let store: StoreType = {
         this.rerenderTree = observer
     }
 }
+
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+
+
+export const addPostActionType = (): AddPostPropsType => ({type: ADD_POST})
+
+export const updateNewPostTextActionType = (text: string): UpdateNewPostTextPropsType => ({type: UPDATE_NEW_POST_TEXT, newPost: text})
+
+export const addMessageActionCreator = (text: string): AddMessagePropsType => ({type: ADD_MESSAGE, message: text})
+
+export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextPropsType => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text})
+
 
 export default store
