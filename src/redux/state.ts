@@ -1,3 +1,6 @@
+import {profileReduser} from "./profile-reduser";
+import {dialogsReduser} from "./dialogs-reduser";
+
 let _rerenderTree = () => {
     console.log('State changed')
 }
@@ -21,21 +24,21 @@ export type ActionTypes =
     | UpdateNewMessageTextPropsType
 
 
-type AddPostPropsType = {
+export type AddPostPropsType = {
     type: 'ADD-POST'
 }
 
-type AddMessagePropsType = {
+export type AddMessagePropsType = {
     type: 'ADD-MESSAGE'
     message: string
 }
 
-type UpdateNewPostTextPropsType = {
+export type UpdateNewPostTextPropsType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newPost: string
 }
 
-type UpdateNewMessageTextPropsType = {
+export type UpdateNewMessageTextPropsType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessageText: string
 }
@@ -190,29 +193,9 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPoost: PostsType = {
-                id: 4,
-                message: this._state.profilePage.newPostText,
-                likeCount: 0
-            }
-            this._state.profilePage.posts.push(newPoost)
-            this.rerenderTree()
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage: MessagesType = {
-                id: 4,
-                message: action.message
-            }
-            this._state.messagesPage.messages.unshift(newMessage)
-            this._state.profilePage.newPostText = ''
-            this.rerenderTree()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newPost
-            this.rerenderTree()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.messagesPage.newMessageText = action.newMessageText
-            this.rerenderTree()
-        }
+        profileReduser(this._state.profilePage, action)
+        dialogsReduser(this._state.messagesPage, action)
+        this.rerenderTree()
     },
 
     subscribe
@@ -221,19 +204,19 @@ let store: StoreType = {
     }
 }
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-
-
-export const addPostActionType = (): AddPostPropsType => ({type: ADD_POST})
-
-export const updateNewPostTextActionType = (text: string): UpdateNewPostTextPropsType => ({type: UPDATE_NEW_POST_TEXT, newPost: text})
-
-export const addMessageActionCreator = (text: string): AddMessagePropsType => ({type: ADD_MESSAGE, message: text})
-
-export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextPropsType => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text})
+// const ADD_POST = 'ADD-POST'
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+// const ADD_MESSAGE = 'ADD-MESSAGE'
+// const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+//
+//
+// export const addPostActionType = (): AddPostPropsType => ({type: ADD_POST})
+//
+// export const updateNewPostTextActionType = (text: string): UpdateNewPostTextPropsType => ({type: UPDATE_NEW_POST_TEXT, newPost: text})
+//
+// export const addMessageActionCreator = (text: string): AddMessagePropsType => ({type: ADD_MESSAGE, message: text})
+//
+// export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextPropsType => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text})
 
 
 export default store

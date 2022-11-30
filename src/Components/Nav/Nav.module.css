@@ -3,7 +3,7 @@
     background-color: rgba(30, 33, 210, 0.36);
     padding: 2px;
     margin: 5px;
-    padding-left: 20px;
+
 }
 
 .item a {
@@ -13,6 +13,7 @@
 
 .item a.activelink {
     color: gold;
+    margin: 10px;
 }
 
 .img {
@@ -24,6 +25,7 @@
 .h1 {
     color: #3644d9;
     padding-top: 30px;
+    margin: 10px;
 }
 
 .siteBarWrapper {

@@ -1,16 +1,10 @@
 import React from "react";
 import s from './Dialogs.module.css'
-import NavLink from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {
-    ActionTypes,
-    addMessageActionCreator,
+import { addMessageActionCreator,   updateNewMessageTextActionCreator} from "../../redux/dialogs-reduser";
+import {ActionTypes, MessagePageType} from "../../redux/state";
 
-    DialogsType,
-    MessagePageType, updateNewMessageTextActionCreator
-} from "../../redux/state";
-import {text} from "stream/consumers";
 
 type LocalDialogsType = {
     messagesPage: MessagePageType
