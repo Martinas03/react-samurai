@@ -2,7 +2,7 @@ import React from 'react';
 // import state, {addMessage, addPost, StateType, subscribe, updateNewMessageText, updateNewPostText} from "./redux/state";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import store from "./redux/state";
+import {store} from "./redux/redux-store";
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 export const rerenderTree = () => {
@@ -19,6 +19,5 @@ export const rerenderTree = () => {
 }
 
 rerenderTree()
-
 
 store.subscribe(rerenderTree)

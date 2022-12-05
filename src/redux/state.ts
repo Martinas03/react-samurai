@@ -1,5 +1,6 @@
-import {profileReduser} from "./profile-reduser";
-import {dialogsReduser} from "./dialogs-reduser";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+import {sideBarReduse} from "./sideBar-reduse";
 
 let _rerenderTree = () => {
     console.log('State changed')
@@ -193,8 +194,9 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        profileReduser(this._state.profilePage, action)
-        dialogsReduser(this._state.messagesPage, action)
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.messagesPage, action)
+        sideBarReduse(this._state.siteBar, action)
         this.rerenderTree()
     },
 
