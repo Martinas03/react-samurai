@@ -8,6 +8,7 @@ type NavType = {
 }
 
 const Nav = (props: NavType) => {
+    console.log(props)
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -28,6 +29,7 @@ const Nav = (props: NavType) => {
 
             <h1 className={s.h1}>{props.siteBarBlock.title}</h1>
             {props.siteBarBlock.friends.map((f: FriendsType) => {
+
                 return <div className={s.siteBarWrapper}>
                     <div>
                         <div>

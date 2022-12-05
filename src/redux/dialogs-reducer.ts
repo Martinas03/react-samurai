@@ -1,9 +1,22 @@
-import {ActionTypes, AddMessagePropsType, MessagePageType, MessagesType, UpdateNewMessageTextPropsType,} from "./state";
+import {
+    ActionTypes,
+    AddMessagePropsType,
+    DialogsType,
+    MessagePageType,
+    MessagesType,
+    UpdateNewMessageTextPropsType,
+} from "./state";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
-let initialStte ={
+type InitialStateType = {
+    dialogs: DialogsType[]
+    messages: MessagesType[]
+    newMessageText: string
+}
+
+let initialStte: InitialStateType ={
     dialogs: [
         {
             id: 1,
@@ -40,7 +53,7 @@ let initialStte ={
     newMessageText: 'New message'
 }
 
-export const dialogsReducer = (state: MessagePageType = initialStte, action: ActionTypes) => {
+export const dialogsReducer = (state = initialStte, action: ActionTypes) => {
     if (action.type === ADD_MESSAGE) {
         let newMessage: MessagesType = {
             id: 4,
