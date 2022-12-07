@@ -107,7 +107,7 @@ let store: StoreType = {
                     name: 'Arlan',
                     avatar: "https://cdn3.vectorstock.com/i/1000x1000/15/32/isolated-cute-cat-avatar-vector-21041532.jpg"
                 },
-                {id: 3, name: 'Abzal', avatar: 'https://avatarfiles.alphacoders.com/798/79894.jpg'},
+                {id: 3, name: 'Abzal', avatar: 'https://thumbs.dreamstime.com/b/cat-avatar-illustration-cartoon-45383590.jpg'},
                 {
                     id: 4,
                     name: 'Ainyr',

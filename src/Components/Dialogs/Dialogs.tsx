@@ -8,7 +8,8 @@ import {ActionTypes, MessagePageType} from "../../redux/state";
 
 type LocalDialogsType = {
     messagesPage: MessagePageType
-    dispatch: (active: ActionTypes)=> void
+    addMessage: (text: string)=> void
+    updateNewMessageText: (message: string)=> void
 }
 
 
@@ -25,17 +26,14 @@ const Dialogs = (props: LocalDialogsType) => {
     const newMessage = () => {
         let text = message.current?.value
 
-        props.dispatch(addMessageActionCreator(text ? text : ''))
-        props.dispatch(updateNewMessageTextActionCreator(''))
-        // props.addMessage(text ? text : '')
-        // props.updateNewMessageText('')
+        props.addMessage(text ? text : '')
+        props.updateNewMessageText('')
     }
     const changeMessage = () => {
 
         if(message.current) {
-            props.dispatch(updateNewMessageTextActionCreator(message.current.value))
-            // props.updateNewMessageText()
-
+            // props.dispatch(updateNewMessageTextActionCreator(message.current.value))
+            props.updateNewMessageText(message.current.value)
         }
     }
 
