@@ -3,12 +3,11 @@ import './App.css';
 import Header from "./Components/Header/Header";
 import Nav from "./Components/Nav/Nav";
 import Profile from "./Components/Profile/Profile";
-import Dialogs from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {StoreType} from "./redux/redux-store";
+import {store, StoreType} from "./redux/redux-store";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 
