@@ -8,7 +8,6 @@ type NavType = {
 }
 
 const Nav = (props: NavType) => {
-    console.log(props)
     return (
         <nav className={s.nav}>
             <div className={s.item}>

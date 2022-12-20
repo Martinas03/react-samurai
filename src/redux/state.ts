@@ -196,7 +196,7 @@ let store: StoreType = {
     dispatch(action) {
         profileReducer(this._state.profilePage, action)
         dialogsReducer(this._state.messagesPage, action)
-        // sideBarReduse(this._state.siteBar, action)
+        sideBarReduse(this._state.siteBar, action)
         this.rerenderTree()
     },
 

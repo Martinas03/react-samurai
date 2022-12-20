@@ -10,13 +10,13 @@ import {
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
-type InitialStateType = {
+export type InitialStateType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
     newMessageText: string
 }
 
-let initialStte: InitialStateType ={
+let initialStte: InitialStateType = {
     dialogs: [
         {
             id: 1,
@@ -53,20 +53,34 @@ let initialStte: InitialStateType ={
     newMessageText: 'New message'
 }
 
-export const dialogsReducer = (state = initialStte, action: ActionTypes) => {
-    if (action.type === ADD_MESSAGE) {
-        let newMessage: MessagesType = {
-            id: 4,
-            message: action.message
+export const dialogsReducer = (state: InitialStateType = initialStte, action: ActionTypes): InitialStateType => {
+    switch (action.type) {
+        case ADD_MESSAGE: {
+            let newMessage: MessagesType = {
+                id: 4,
+                message: action.message
+            }
+            return {
+                ...state,
+                messages: [newMessage, ...state.messages],
+                newMessageText: ''
+            }
+
         }
-        state.messages.unshift(newMessage)
-        state.newMessageText = ''
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-        state.newMessageText = action.newMessageText
+        case UPDATE_NEW_MESSAGE_TEXT : {
+            return {
+                ...state,
+                newMessageText: action.newMessageText
+            }
+        }
+        default:
+            return state
     }
-    return state
 }
 
 export const addMessageActionCreator = (text: string): AddMessagePropsType => ({type: ADD_MESSAGE, message: text})
 
-export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextPropsType => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text})
+export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextPropsType => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newMessageText: text
+})
