@@ -1,6 +1,7 @@
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sideBarReduse} from "./sideBar-reduse";
+import {followAC, setUsersAC, unFollowAC} from "./users-reducer";
 
 let _rerenderTree = () => {
     console.log('State changed')
@@ -23,6 +24,9 @@ export type ActionTypes =
     | AddMessagePropsType
     | UpdateNewPostTextPropsType
     | UpdateNewMessageTextPropsType
+    | FollowActionType
+    | UnFollowActionType
+    | SetUsersActionType
 
 
 export type AddPostPropsType = {
@@ -44,6 +48,11 @@ export type UpdateNewMessageTextPropsType = {
     newMessageText: string
 }
 
+export type FollowActionType = ReturnType<typeof followAC>
+//
+export type UnFollowActionType = ReturnType<typeof unFollowAC>
+
+export type SetUsersActionType = ReturnType<typeof setUsersAC>
 
 export type StateType = {
     messagesPage: MessagePageType
@@ -107,7 +116,11 @@ let store: StoreType = {
                     name: 'Arlan',
                     avatar: "https://cdn3.vectorstock.com/i/1000x1000/15/32/isolated-cute-cat-avatar-vector-21041532.jpg"
                 },
-                {id: 3, name: 'Abzal', avatar: 'https://thumbs.dreamstime.com/b/cat-avatar-illustration-cartoon-45383590.jpg'},
+                {
+                    id: 3,
+                    name: 'Abzal',
+                    avatar: 'https://thumbs.dreamstime.com/b/cat-avatar-illustration-cartoon-45383590.jpg'
+                },
                 {
                     id: 4,
                     name: 'Ainyr',
