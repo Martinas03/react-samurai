@@ -1,7 +1,7 @@
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sideBarReduse} from "./sideBar-reduse";
-import {followAC, setUsersAC, unFollowAC} from "./users-reducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unFollowAC} from "./users-reducer";
 
 let _rerenderTree = () => {
     console.log('State changed')
@@ -27,6 +27,8 @@ export type ActionTypes =
     | FollowActionType
     | UnFollowActionType
     | SetUsersActionType
+    | SetCurrentPageActionType
+    | SetTotalUsersCountActionType
 
 
 export type AddPostPropsType = {
@@ -49,10 +51,14 @@ export type UpdateNewMessageTextPropsType = {
 }
 
 export type FollowActionType = ReturnType<typeof followAC>
-//
+
 export type UnFollowActionType = ReturnType<typeof unFollowAC>
 
 export type SetUsersActionType = ReturnType<typeof setUsersAC>
+
+export type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
+
+export type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
 
 export type StateType = {
     messagesPage: MessagePageType
