@@ -11,9 +11,9 @@ export type UsersType = {
 
 let initialState: InitialStateType = {
     users: [],
-    pageSize: 20,
+    pageSize: 100,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 2
 }
 
 export type InitialStateType = {
