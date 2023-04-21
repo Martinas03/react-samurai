@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "./UsersFC.module.css";
 import userAvartar from "../../Assets/images/user.png";
 import {UsersType} from "../../redux/users-reducer";
@@ -15,6 +15,9 @@ type UsersFCType = {
 
 export const UsersFC = (props: UsersFCType) => {
 
+    let [index, setIndex] = useState(1)
+    let diapason = 10
+
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = []
@@ -22,16 +25,30 @@ export const UsersFC = (props: UsersFCType) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
     }
+    console.log(pageCount)
+    console.log(props.totalUsersCount)
+    console.log(index)
 
     return <div>
         <div className={s.numbers}>
-            {pages.map(p => {
-                return <span className={props.currentPage === p ? s.selectedPage : ''}
-                             onClick={() => {
-                                 props.onPageChanged(p)
-                             }}>{p}</span>
+            <button onClick={() => setIndex(1)}>to begin</button>
+            <button disabled={index === 1} onClick={() => setIndex(index - diapason)}>back</button>
+            {pages.map((p, i) => {
+                let iPlusOne = i + 1
+                if (iPlusOne >= index && iPlusOne < (index + diapason)) {
+                    return <span key={i} className={props.currentPage === p ? s.selectedPage : ''}
+                                 onClick={() => {
+                                     props.onPageChanged(p)
+                                 }}>{p}</span>
+                } else {
+                    return <>
+                    </>
+                }
+
             })}
 
+            <button disabled={index + diapason >= pageCount} onClick={() => setIndex(index + diapason)}>next</button>
+            <button onClick={() => setIndex(Math.floor(pageCount / diapason) * diapason + 1)}>to end</button>
         </div>
         {props.users.map((u: any) => {
             return <div key={u.id}>

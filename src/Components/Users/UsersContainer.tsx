@@ -52,67 +52,17 @@ class UsersApiComponent extends React.Component<any> {
     }
 
     render(): React.ReactNode {
-        let pageCount = Math.ceil(this.props.totalUsersCount /this.props.pageSize)
 
-        let pages = []
-
-        for (let i = 1; i <= pageCount; i++) {
-            pages.push(i)
-        }
-
-        return <div>
-            <div className={s.numbers}>
-                {pages.map(p => {
-                    return <span className={this.props.currentPage === p ? s.selectedPage : ''}
-                                 onClick={() => {
-                                     this.onPageChanged(p)
-                                 }}>{p}</span>
-                })}
-
-            </div>
-            {this.props.users.map((u: any) => {
-                return <div key={u.id}>
-                    <span>
-                        <div>
-                            <img className={s.img} src={u.photos.small != null ? u.photos.small : userAvartar}/>
-                        </div>
-                        <div>
-                            {u.isFollow
-                                ? <button onClick={() => {
-                                    this.props.unFollow(u.id)
-                                }}>unfollow</button>
-                                : <button onClick={() => {
-                                    this.props.follow(u.id)
-                                }}>follow</button>}
-                        </div>
-                    </span>
-                    <span>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </span>
-                    <span>
-                        <div>{'u.location.country'}</div>
-                        <div>{'u.location.city'}</div>
-                    </span>
-                </div>
-            })}
-
-        </div>
-
-
-        // return <UsersFC currentPage={this.props.currentPage}
-        //                 pageSize={this.props.pageSize}
-        //                 totalUsersCount={this.props.currentPage}
-        //                 onPageChanged={this.onPageChanged}
-        //                 users={this.props.users}
-        //                 follow={this.props.follow}
-        //                 unFollow={this.props.unFollow}
-        // />
-
-
+        return <UsersFC currentPage={this.props.currentPage}
+                        pageSize={this.props.pageSize}
+                        totalUsersCount={this.props.totalUsersCount}
+                        onPageChanged={this.onPageChanged}
+                        users={this.props.users}
+                        follow={this.props.follow}
+                        unFollow={this.props.unFollow}
+        />
     }
 }
-
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
@@ -140,7 +90,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         setTotalUsersCount: (totalCount: number) => {
             dispatch(setTotalUsersCountAC(totalCount))
         }
-
     }
 }
 
