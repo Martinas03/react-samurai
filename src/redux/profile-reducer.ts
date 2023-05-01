@@ -1,6 +1,6 @@
 import {
     ActionTypes,
-    AddPostPropsType, UpdateNewPostTextPropsType,
+    AddPostPropsType, SetUsersProfileActionType, UpdateNewPostTextPropsType,
 } from "./state";
 
 export type PostsType = {
@@ -13,6 +13,7 @@ export type InitialStateType = typeof initialState
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const SET_USERS_PROFILE = 'SET-USERS-PROFILE'
 
 let initialState = {
     posts: [
@@ -20,7 +21,8 @@ let initialState = {
         {id: 2, message: "It's my first post", likeCount: 55},
         {id: 3, message: "Hehehey", likeCount: 550},
     ] as Array<PostsType>,
-    newPostText: 'It-kamasutra'
+    newPostText: 'It-kamasutra',
+    profile: null
 }
 
 export const profileReducer = (state = initialState, action: ActionTypes): InitialStateType => {
@@ -43,6 +45,9 @@ export const profileReducer = (state = initialState, action: ActionTypes): Initi
                 newPostText: action.newPost
             }
         }
+        case SET_USERS_PROFILE: {
+            return {...state, profile: action.profile}
+        }
         default:
             return state
     }
@@ -50,6 +55,7 @@ export const profileReducer = (state = initialState, action: ActionTypes): Initi
 
 
 export const addPostActionCreator = (): AddPostPropsType => ({type: ADD_POST})
+export const setUserProfile = (profile: any): SetUsersProfileActionType => ({type: SET_USERS_PROFILE, profile})
 
 export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextPropsType => ({
     type: UPDATE_NEW_POST_TEXT,

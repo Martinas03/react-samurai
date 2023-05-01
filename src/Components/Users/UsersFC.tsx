@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import s from "./UsersFC.module.css";
 import userAvartar from "../../Assets/images/user.png";
 import {UsersType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersFCType = {
     totalUsersCount: number
@@ -25,9 +26,6 @@ export const UsersFC = (props: UsersFCType) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
     }
-    console.log(pageCount)
-    console.log(props.totalUsersCount)
-    console.log(index)
 
     return <div>
         <div className={s.numbers}>
@@ -54,7 +52,9 @@ export const UsersFC = (props: UsersFCType) => {
             return <div key={u.id}>
                     <span>
                         <div>
+                            <NavLink to={'profile/' + u.id}>
                             <img className={s.img} src={u.photos.small != null ? u.photos.small : userAvartar}/>
+                            </NavLink>
                         </div>
                         <div>
                             {u.isFollow

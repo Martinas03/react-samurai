@@ -5,17 +5,19 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {store, StoreType} from "../../redux/redux-store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-// type ProfilePropsType = {
-//     store: StoreType
-//     // addPost: ()=> void
-//     // updateNewPostText: (text: string)=> void
-// }
+type ProfilePropsType = {
+   profile: any
+    // addPost: ()=> void
+    // updateNewPostText: (text: string)=> void
+}
 
-const Profile = () => {
+
+
+const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={s.profile}>
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>
     )

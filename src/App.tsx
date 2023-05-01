@@ -10,6 +10,7 @@ import Settings from "./Components/Settings/Settings";
 import {store, StoreType} from "./redux/redux-store";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
+import ProfileContiner from "./Components/Profile/ProfileContainer";
 
 
 
@@ -30,7 +31,7 @@ const App = (props: AppPropsType) => {
                     <Nav siteBarBlock={state.siteBar}/>
                     <div className='app-wrapper-content'>
                             <Route path={'/dialogs'} render={() => <DialogsContainer />}/>
-                            <Route path={'/profile'} render={() => <Profile />}/>
+                            <Route path={'/profile'} render={() => <ProfileContiner />}/>
                             <Route path={'/news'} render={() => <News/>}/>
                             <Route path={'/music'} render={() => <Music/>}/>
                             <Route path={'/settings'} render={() => <Settings/>}/>

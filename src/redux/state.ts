@@ -1,4 +1,4 @@
-import {profileReducer} from "./profile-reducer";
+import {profileReducer, setUserProfile} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sideBarReduse} from "./sideBar-reduse";
 import {
@@ -28,6 +28,7 @@ export type StoreType = {
 
 export type ActionTypes =
     AddPostPropsType
+    | SetUsersProfileActionType
     | AddMessagePropsType
     | UpdateNewPostTextPropsType
     | UpdateNewMessageTextPropsType
@@ -41,6 +42,11 @@ export type ActionTypes =
 
 export type AddPostPropsType = {
     type: 'ADD-POST'
+}
+
+export type SetUsersProfileActionType = {
+    type: 'SET-USERS-PROFILE'
+    profile: any
 }
 
 export type AddMessagePropsType = {
@@ -96,6 +102,7 @@ export type MessagesType = {
 export type ProfilePageType = {
     posts: PostsType[]
     newPostText: string
+    profile: any
 }
 
 export type PostsType = {
@@ -166,7 +173,8 @@ let store: StoreType = {
                 {id: 2, message: "It's my first post", likeCount: 55},
                 {id: 3, message: "Hehehey", likeCount: 550},
             ],
-            newPostText: 'It-kamasutra'
+            newPostText: 'It-kamasutra',
+            profile: null
         },
         siteBar: {
             title: 'Friends',
