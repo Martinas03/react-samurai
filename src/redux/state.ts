@@ -2,12 +2,12 @@ import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sideBarReduse} from "./sideBar-reduse";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unFollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unFollow
 } from "./users-reducer";
 
 let _rerenderTree = () => {
@@ -58,17 +58,17 @@ export type UpdateNewMessageTextPropsType = {
     newMessageText: string
 }
 
-export type FollowActionType = ReturnType<typeof followAC>
+export type FollowActionType = ReturnType<typeof follow>
 
-export type UnFollowActionType = ReturnType<typeof unFollowAC>
+export type UnFollowActionType = ReturnType<typeof unFollow>
 
-export type SetUsersActionType = ReturnType<typeof setUsersAC>
+export type SetUsersActionType = ReturnType<typeof setUsers>
 
-export type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
+export type SetCurrentPageActionType = ReturnType<typeof setCurrentPage>
 
-export type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
+export type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 
-export type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
+export type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 
 export type StateType = {
     messagesPage: MessagePageType
