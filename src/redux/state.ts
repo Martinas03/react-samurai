@@ -9,6 +9,7 @@ import {
     toggleIsFetching,
     unFollow
 } from "./users-reducer";
+import {setUserData} from "./auth-reducer";
 
 let _rerenderTree = () => {
     console.log('State changed')
@@ -38,6 +39,7 @@ export type ActionTypes =
     | SetCurrentPageActionType
     | SetTotalUsersCountActionType
     | ToggleIsFetchingActionType
+    | SetUserDataActionType
 
 
 export type AddPostPropsType = {
@@ -75,6 +77,8 @@ export type SetCurrentPageActionType = ReturnType<typeof setCurrentPage>
 export type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 
 export type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
+
+export type SetUserDataActionType = ReturnType<typeof setUserData>
 
 export type StateType = {
     messagesPage: MessagePageType

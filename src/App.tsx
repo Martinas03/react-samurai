@@ -11,6 +11,8 @@ import {store, StoreType} from "./redux/redux-store";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContiner from "./Components/Profile/ProfileContainer";
+import HeaderContainer from "./Components/Header/HeaderContainer";
+import {useSelector} from "react-redux";
 
 
 
@@ -24,10 +26,11 @@ export type AppPropsType = {
 
 const App = (props: AppPropsType) => {
     let state = props.store.getState()
+
     return (
         <BrowserRouter>
                 <div className='app-wrapper'>
-                    <Header/>
+                    <HeaderContainer/>
                     <Nav siteBarBlock={state.siteBar}/>
                     <div className='app-wrapper-content'>
                             <Route path={'/dialogs'} render={() => <DialogsContainer />}/>
