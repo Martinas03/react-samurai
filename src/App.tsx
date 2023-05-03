@@ -31,7 +31,7 @@ const App = (props: AppPropsType) => {
                     <Nav siteBarBlock={state.siteBar}/>
                     <div className='app-wrapper-content'>
                             <Route path={'/dialogs'} render={() => <DialogsContainer />}/>
-                            <Route path={'/profile'} render={() => <ProfileContiner />}/>
+                            <Route path={'/profile/:userId?'} render={() => <ProfileContiner />}/>
                             <Route path={'/news'} render={() => <News/>}/>
                             <Route path={'/music'} render={() => <Music/>}/>
                             <Route path={'/settings'} render={() => <Settings/>}/>
