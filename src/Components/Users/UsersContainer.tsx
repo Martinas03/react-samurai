@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
@@ -10,9 +9,9 @@ import {
     UsersType
 } from "../../redux/users-reducer";
 import React from "react";
-import axios from "axios";
 import {UsersFC} from "./UsersFC";
 import Preloader from "../comon/preloader/Preloader";
+import {usersAPI} from "../../api/api";
 
 
 export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -39,28 +38,23 @@ class UsersApiComponent extends React.Component<any> {
 
     componentDidMount(): void {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
+            usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
 
-        })
-            .then(response => {
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
 
-        })
-            .then(response => {
+            .then(data => {
                 this.props.toggleIsFetching(false)
-
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
@@ -114,11 +108,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 //     }
 // }
 
-export default connect(mapStateToProps,{
+export default connect(mapStateToProps, {
     follow,
     unFollow,
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching
-} )(UsersApiComponent);
+})(UsersApiComponent);
