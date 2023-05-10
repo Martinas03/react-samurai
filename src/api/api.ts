@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 
 const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
         "API-KEY": "545f0941-50bb-4eed-89ba-102ecd1c4cc4"
-    },
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/'
+    }
 })
 
 export const usersAPI = {

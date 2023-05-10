@@ -13,6 +13,8 @@ type UsersFCType = {
     users: UsersType[]
     follow: (usersId: number) => void
     unFollow: (usersId: number) => void
+    toggleFolowingProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: Array<number>
 }
 
 export const UsersFC = (props: UsersFCType) => {
@@ -59,21 +61,25 @@ export const UsersFC = (props: UsersFCType) => {
                         </div>
                         <div>
                             {u.isFollow
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFolowingProgress(true, u.id)
                                     followAPI.getUnfollow(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.unFollow(u.id)
                                             }
+                                            props.toggleFolowingProgress(false, u.id)
                                         })
 
                                 }}>unfollow</button>
-                                : <button onClick={() => {
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFolowingProgress(true, u.id)
                                     followAPI.getFollow(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.toggleFolowingProgress(false, u.id)
                                         })
 
                                 }}>follow</button>}
