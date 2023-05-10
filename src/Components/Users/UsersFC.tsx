@@ -11,9 +11,8 @@ type UsersFCType = {
     currentPage: number
     onPageChanged: (pageNumber: number) => void
     users: UsersType[]
-    follow: (usersId: number) => void
-    unFollow: (usersId: number) => void
-    toggleFolowingProgress: (isFetching: boolean, userId: number) => void
+    follow: any
+    unfollow: any
     followingInProgress: Array<number>
 }
 
@@ -62,25 +61,11 @@ export const UsersFC = (props: UsersFCType) => {
                         <div>
                             {u.isFollow
                                 ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.toggleFolowingProgress(true, u.id)
-                                    followAPI.getUnfollow(u.id)
-                                        .then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.unFollow(u.id)
-                                            }
-                                            props.toggleFolowingProgress(false, u.id)
-                                        })
+                                    props.unfollow(u.id)
 
                                 }}>unfollow</button>
                                 : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.toggleFolowingProgress(true, u.id)
-                                    followAPI.getFollow(u.id)
-                                        .then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.follow(u.id)
-                                            }
-                                            props.toggleFolowingProgress(false, u.id)
-                                        })
+                                    props.follow(u.id)
 
                                 }}>follow</button>}
                         </div>

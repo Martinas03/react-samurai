@@ -1,5 +1,5 @@
 import {ActionTypes} from "./state";
-import {usersAPI} from "../api/api";
+import {followAPI, usersAPI} from "../api/api";
 
 export type UsersType = {
     id: number
@@ -91,8 +91,8 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return state
     }
 }
-export const follow = (userId: number) => ({type: FOLLOW, userId} as const)
-export const unFollow = (userId: number) => ({type: UNFOLLOW, userId} as const)
+export const followSuccess = (userId: number) => ({type: FOLLOW, userId} as const)
+export const unFollowSuccess = (userId: number) => ({type: UNFOLLOW, userId} as const)
 export const setUsers = (user: UsersType[]) => ({type: SET_USERS, user} as const)
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalCount} as const)
@@ -109,6 +109,34 @@ export const getUsers = (currentPage: number, pageSize: number) => {
                 dispatch(setTotalUsersCount(data.totalCount))
             })
     }
+}
+
+export const follow = (userId: number) => {
+   return (dispatch: any) => {
+       dispatch(toggleFolowingProgress(true, userId))
+       followAPI.getFollow(userId)
+           .then(data => {
+               if (data.resultCode === 0) {
+                   dispatch(followSuccess(userId))
+               }
+               dispatch(toggleFolowingProgress(false, userId))
+           })
+
+   }
+}
+
+export const unfollow = (userId: number) => {
+   return (dispatch: any) => {
+       dispatch(toggleFolowingProgress(true, userId))
+       followAPI.getUnfollow(userId)
+           .then(data => {
+               if (data.resultCode === 0) {
+                   dispatch(unFollowSuccess(userId))
+               }
+               dispatch(toggleFolowingProgress(false, userId))
+           })
+
+   }
 }
 
 

@@ -2,12 +2,12 @@ import {profileReducer, setUserProfile} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sideBarReduse} from "./sideBar-reduse";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers, toggleFolowingProgress,
     toggleIsFetching,
-    unFollow
+    unFollowSuccess
 } from "./users-reducer";
 import {setUserData} from "./auth-reducer";
 
@@ -67,9 +67,9 @@ export type UpdateNewMessageTextPropsType = {
     newMessageText: string
 }
 
-export type FollowActionType = ReturnType<typeof follow>
+export type FollowActionType = ReturnType<typeof followSuccess>
 
-export type UnFollowActionType = ReturnType<typeof unFollow>
+export type UnFollowActionType = ReturnType<typeof unFollowSuccess>
 
 export type SetUsersActionType = ReturnType<typeof setUsers>
 
