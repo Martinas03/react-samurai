@@ -2,6 +2,7 @@ import {
     ActionTypes,
     AddPostPropsType, SetUsersProfileActionType, UpdateNewPostTextPropsType,
 } from "./state";
+import {profileAPI} from "../api/api";
 
 export type PostsType = {
     id: number
@@ -61,3 +62,13 @@ export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextP
     type: UPDATE_NEW_POST_TEXT,
     newPost: text
 })
+
+export const getProfile = (userId: number) => {
+    return (dispatch: any) => {
+
+        profileAPI.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
+}

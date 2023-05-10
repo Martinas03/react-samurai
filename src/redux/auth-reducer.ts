@@ -1,5 +1,5 @@
 import {ActionTypes} from "./state";
-
+import {authAPI} from "../api/api";
 
 
 let initialState: InitialStateType = {
@@ -33,9 +33,26 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
             }
         }
 
-        default: return state
+        default:
+            return state
     }
 }
-export const setUserData = (userId: number, login: string, email: string) => ({type: SET_USER_DATA, data: {userId, login, email}} as const)
+export const setUserData = (userId: number, login: string, email: string) => ({
+    type: SET_USER_DATA,
+    data: {userId, login, email}
+} as const)
+
+export const getAuth = () => {
+    return (dispatch: any) => {
+        authAPI.getAuth()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data
+                    dispatch(setUserData(id, login, email))
+
+                }
+            })
+    }
+}
 
 

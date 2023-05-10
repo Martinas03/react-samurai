@@ -28,7 +28,7 @@ export const UsersFC = (props: UsersFCType) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
     }
-
+debugger
     return <div>
         <div className={s.numbers}>
             <button onClick={() => setIndex(1)}>to begin</button>
@@ -36,8 +36,11 @@ export const UsersFC = (props: UsersFCType) => {
             {pages.map((p, i) => {
                 let iPlusOne = i + 1
                 if (iPlusOne >= index && iPlusOne < (index + diapason)) {
-                    return <span key={i} className={props.currentPage === p ? s.selectedPage : ''}
-                                 onClick={() => {
+                    return <span key={i} className={
+                        p === props.currentPage ?
+                            s.selectedPage
+                            : ''
+                    } onClick={() => {
                                      props.onPageChanged(p)
                                  }}>{p}</span>
                 } else {

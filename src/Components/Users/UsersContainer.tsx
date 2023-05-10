@@ -12,7 +12,7 @@ import {UsersFC} from "./UsersFC";
 import Preloader from "../comon/preloader/Preloader";
 
 
-export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
+// export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
 
 type MapStatePropsType = {
     users: UsersType[]
