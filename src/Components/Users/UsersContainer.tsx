@@ -1,17 +1,15 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    follow,
+    follow, getUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleFolowingProgress, toggleIsFetching,
+    toggleFolowingProgress,
     unFollow,
     UsersType
 } from "../../redux/users-reducer";
 import React from "react";
 import {UsersFC} from "./UsersFC";
 import Preloader from "../comon/preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 
 export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -33,30 +31,17 @@ type MapDispatchPropsType = {
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
     toggleFolowingProgress: (isFetching: boolean, userId: number) => void
+    getUsers: any
 }
 
 class UsersApiComponent extends React.Component<any> {
 
     componentDidMount(): void {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render(): React.ReactNode {
@@ -92,9 +77,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 export default connect(mapStateToProps, {
     follow,
     unFollow,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
-    toggleFolowingProgress
+    toggleFolowingProgress,
+    getUsers
 })(UsersApiComponent);
