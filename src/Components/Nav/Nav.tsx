@@ -17,6 +17,9 @@ const Nav = (props: NavType) => {
                 <NavLink to={'/dialogs'} className={s.activelink}>Messages</NavLink>
             </div>
             <div className={s.item}>
+                <NavLink to={'/users'} className={s.activelink}>Users</NavLink>
+            </div>
+            <div className={s.item}>
                 <NavLink to={'/news'} className={s.activelink}>News</NavLink>
             </div>
             <div className={s.item}>
@@ -25,9 +28,7 @@ const Nav = (props: NavType) => {
             <div className={s.item}>
                 <NavLink to={'/settings'} className={s.activelink}>Settings</NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink to={'/users'} className={s.activelink}>Users</NavLink>
-            </div>
+
 
             <h1 className={s.h1}>{props.siteBarBlock.title}</h1>
             {props.siteBarBlock.friends.map((f: FriendsType) => {

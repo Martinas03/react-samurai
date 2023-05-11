@@ -13,6 +13,7 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContiner from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import {useSelector} from "react-redux";
+import Login from "./Components/Login/Login";
 
 
 
@@ -35,10 +36,11 @@ const App = (props: AppPropsType) => {
                     <div className='app-wrapper-content'>
                             <Route path={'/dialogs'} render={() => <DialogsContainer />}/>
                             <Route path={'/profile/:userId?'} render={() => <ProfileContiner />}/>
+                            <Route path={'/users'} render={() => <UsersContainer/>}/>
                             <Route path={'/news'} render={() => <News/>}/>
                             <Route path={'/music'} render={() => <Music/>}/>
                             <Route path={'/settings'} render={() => <Settings/>}/>
-                            <Route path={'/users'} render={() => <UsersContainer/>}/>
+                            <Route path={'/login'} render={() => <Login/>}/>
                     </div>
                 </div>
         </BrowserRouter>

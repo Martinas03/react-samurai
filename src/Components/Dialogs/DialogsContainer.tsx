@@ -51,6 +51,7 @@ type LocalDialogsType = {
 
 type MapStatePropsType = {
     messagesPage: InitialStateType
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -60,7 +61,8 @@ type MapDispatchPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        messagesPage: state.messagesPage
+        messagesPage: state.messagesPage,
+        isAuth: state.auth.isAuth
     }
 }
 
