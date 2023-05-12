@@ -39,7 +39,7 @@ const Dialogs = (props: LocalDialogsType) => {
             props.updateNewMessageText(message.current.value)
         }
     }
-    if (!props.isAuth) return <Redirect to={'/login'}/>
+    // if (!props.isAuth) return <Redirect to={'/login'}/>
             // <Login/>
 
     return (
