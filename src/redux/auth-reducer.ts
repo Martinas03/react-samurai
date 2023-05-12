@@ -1,5 +1,6 @@
 import {ActionTypes} from "./state";
 import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 
 let initialState: InitialStateType = {
@@ -43,7 +44,7 @@ export const setUserData = (userId: number, login: string, email: string) => ({
 } as const)
 
 export const getAuth = () => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         authAPI.getAuth()
             .then(data => {
                 if (data.resultCode === 0) {

@@ -11,7 +11,7 @@ import React from "react";
 import {UsersFC} from "./UsersFC";
 import Preloader from "../comon/preloader/Preloader";
 import WithAuthRedirect from "../hoc/WithAuthRedirect";
-import {compose} from "redux";
+import {compose, Dispatch} from "redux";
 
 
 // export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -31,9 +31,9 @@ type MapDispatchPropsType = {
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
     toggleFolowingProgress: (isFetching: boolean, userId: number) => void
-    getUsers: any
-    follow: any
-    unfollow: any
+    getUsers: (currentPage: number, pageSize: number)=> (dispatch: Dispatch) => void
+    follow: (userId: number)=> (dispatch: Dispatch) => void
+    unfollow:  (userId: number)=> (dispatch: Dispatch) => void
 }
 
 class UsersApiComponent extends React.Component<any> {
@@ -74,18 +74,18 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-compose(
-    connect(mapStateToProps, {
-        setCurrentPage,
-        toggleFolowingProgress,
-        getUsers,
-        follow,
-        unfollow
-    }),
-    WithAuthRedirect,
-) (UsersApiComponent)
-
-let AuthRedirectComponent: any = WithAuthRedirect(UsersApiComponent)
+// compose(
+//     connect(mapStateToProps, {
+//         setCurrentPage,
+//         toggleFolowingProgress,
+//         getUsers,
+//         follow,
+//         unfollow
+//     }),
+//     WithAuthRedirect,
+// ) (UsersApiComponent)
+//
+// let AuthRedirectComponent: any = WithAuthRedirect(UsersApiComponent)
 
 
 export default compose(
