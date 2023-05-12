@@ -11,7 +11,7 @@ import {ActionTypes, MessagePageType} from "../../redux/state";
 import {AppStateType, StoreType} from "../../redux/redux-store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import WithAuthRedirect from "../hoc/WithAuthRedirect";
 
 
@@ -80,10 +80,18 @@ export const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => 
 //     }
 // }
 
-let AuthRedirectComponent: any = WithAuthRedirect(Dialogs)
+// compose(
+//     connect(mapStateToProps, mapDispatchToProps),
+//     WithAuthRedirect
+// ) (Dialogs)
+//
+// let AuthRedirectComponent: any = WithAuthRedirect(Dialogs)
+//
+// // AuthRedirectComponent = connect(mapDispatchToPropsForRedirect) (AuthRedirectComponent)
+//
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
-// AuthRedirectComponent = connect(mapDispatchToPropsForRedirect) (AuthRedirectComponent)
-
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
-
-export default DialogsContainer
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect
+) (Dialogs)

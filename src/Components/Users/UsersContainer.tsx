@@ -10,6 +10,8 @@ import {
 import React from "react";
 import {UsersFC} from "./UsersFC";
 import Preloader from "../comon/preloader/Preloader";
+import WithAuthRedirect from "../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 
 // export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -72,11 +74,27 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
+compose(
+    connect(mapStateToProps, {
+        setCurrentPage,
+        toggleFolowingProgress,
+        getUsers,
+        follow,
+        unfollow
+    }),
+    WithAuthRedirect,
+) (UsersApiComponent)
 
-export default connect(mapStateToProps, {
-    setCurrentPage,
-    toggleFolowingProgress,
-    getUsers,
-    follow,
-    unfollow
-})(UsersApiComponent);
+let AuthRedirectComponent: any = WithAuthRedirect(UsersApiComponent)
+
+
+export default compose(
+    connect(mapStateToProps, {
+        setCurrentPage,
+        toggleFolowingProgress,
+        getUsers,
+        follow,
+        unfollow
+    }),
+    WithAuthRedirect,
+) (UsersApiComponent)
