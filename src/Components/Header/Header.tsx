@@ -9,7 +9,6 @@ type HeaderPropsType = {
 
 const Header = (props: HeaderPropsType) => {
 
-    console.log(props)
     return (
         <header className={s.header}>
             <img src='https://seeklogo.com/images/H/hummingbird-logo-D436A31661-seeklogo.com.png' />

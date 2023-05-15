@@ -28,7 +28,6 @@ export const UsersFC = (props: UsersFCType) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
     }
-debugger
     return <div>
         <div className={s.numbers}>
             <button onClick={() => setIndex(1)}>to begin</button>

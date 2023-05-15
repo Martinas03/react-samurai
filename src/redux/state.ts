@@ -41,6 +41,7 @@ export type ActionTypes =
     | ToggleIsFetchingActionType
     | SetUserDataActionType
     | ToggleFolowingProgressActionType
+    | SetStatusPropsType
 
 
 export type AddPostPropsType = {
@@ -60,6 +61,11 @@ export type AddMessagePropsType = {
 export type UpdateNewPostTextPropsType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newPost: string
+}
+
+export type SetStatusPropsType = {
+    type: 'SET-STATUS'
+    status: string
 }
 
 export type UpdateNewMessageTextPropsType = {
@@ -110,6 +116,7 @@ export type ProfilePageType = {
     posts: PostsType[]
     newPostText: string
     profile: any
+    status: string
 }
 
 export type PostsType = {
@@ -181,7 +188,8 @@ let store: StoreType = {
                 {id: 3, message: "Hehehey", likeCount: 550},
             ],
             newPostText: 'It-kamasutra',
-            profile: null
+            profile: null,
+            status: ''
         },
         siteBar: {
             title: 'Friends',

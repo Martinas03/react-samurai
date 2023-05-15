@@ -3,6 +3,7 @@ import {
     AddPostPropsType, SetUsersProfileActionType, UpdateNewPostTextPropsType,
 } from "./state";
 import {profileAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type PostsType = {
     id: number
@@ -15,6 +16,7 @@ export type InitialStateType = typeof initialState
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USERS_PROFILE = 'SET-USERS-PROFILE'
+const SET_STATUS = 'SET-STATUS'
 
 let initialState = {
     posts: [
@@ -23,7 +25,8 @@ let initialState = {
         {id: 3, message: "Hehehey", likeCount: 550},
     ] as Array<PostsType>,
     newPostText: 'It-kamasutra',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 export const profileReducer = (state = initialState, action: ActionTypes): InitialStateType => {
@@ -49,6 +52,11 @@ export const profileReducer = (state = initialState, action: ActionTypes): Initi
         case SET_USERS_PROFILE: {
             return {...state, profile: action.profile}
         }
+
+        case SET_STATUS: {
+            return {...state, status: action.status}
+        }
+
         default:
             return state
     }
@@ -63,12 +71,35 @@ export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextP
     newPost: text
 })
 
+export const setStatus = (status: string) => ({type: SET_STATUS, status})
+
 export const getProfile = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
 
         profileAPI.getProfile(userId)
             .then(data => {
                 dispatch(setUserProfile(data))
+            })
+    }
+}
+
+export const getStatus = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(data => {
+                dispatch(setStatus(data.data))
+            })
+    }
+}
+
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+
+        profileAPI.updateStatus(status)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setUserProfile(data))
+                }
             })
     }
 }
