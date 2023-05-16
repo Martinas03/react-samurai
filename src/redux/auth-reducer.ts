@@ -7,7 +7,8 @@ let initialState: InitialStateType = {
     userId: null,
     login: null,
     email: null,
-    isAuth: false
+    isAuth: false,
+    checked: false
 }
 
 export type InitialStateType = {
@@ -15,9 +16,11 @@ export type InitialStateType = {
     login: any
     email: any
     isAuth: boolean
+    checked: boolean
 }
 
 const SET_USER_DATA = 'SET_USER_DATA'
+const SET_LOGIN = 'SET_LOGIN'
 
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
@@ -51,6 +54,18 @@ export const getAuth = () => {
                     let {id, email, login} = data.data
                     dispatch(setUserData(id, login, email))
 
+                }
+            })
+    }
+}
+
+export const getLogin = () => {
+    return (dispatch: Dispatch) => {
+        authAPI.getLogin()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data
+                    dispatch(setUserData(id, login, email))
                 }
             })
     }

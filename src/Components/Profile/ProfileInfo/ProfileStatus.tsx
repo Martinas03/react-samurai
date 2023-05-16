@@ -12,8 +12,9 @@ class ProfileStatus extends React.Component<any, any> {
             editMode: true
         })
     }
-    deActivateMode = () => {
-        debugger
+    deActivateMode = (event: ChangeEvent<HTMLInputElement>) => {
+        // debugger
+        event.preventDefault()
         this.setState({
             editMode: false
         } )
@@ -25,7 +26,19 @@ class ProfileStatus extends React.Component<any, any> {
             status: event.currentTarget.value
         } )
     }
+
+    componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
+        console.log('component updated')
+        // debugger
+     if(prevProps.status !== this.props.status) {
+         this.setState({
+             status: this.props.status
+         })
+     }
+    }
+
     render(): React.ReactNode {
+        console.log('start')
         return (
             <div>
 
@@ -47,6 +60,6 @@ class ProfileStatus extends React.Component<any, any> {
     }
 
 
-};
+}
 
 export default ProfileStatus;
