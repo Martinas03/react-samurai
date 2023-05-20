@@ -79,6 +79,7 @@ export const getProfile = (userId: number) => {
         profileAPI.getProfile(userId)
             .then(data => {
                 dispatch(setUserProfile(data))
+                console.log(data)
             })
     }
 }
@@ -98,7 +99,9 @@ export const updateStatus = (status: string) => {
         profileAPI.updateStatus(status)
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setUserProfile(data))
+                    // dispatch(setUserProfile(data))
+                    dispatch(setStatus(status))
+
                 }
             })
     }

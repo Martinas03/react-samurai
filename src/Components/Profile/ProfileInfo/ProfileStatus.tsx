@@ -7,7 +7,6 @@ class ProfileStatus extends React.Component<any, any> {
     }
 
     activateMode = () => {
-
         this.setState({
             editMode: true
         })
@@ -28,7 +27,7 @@ class ProfileStatus extends React.Component<any, any> {
     }
 
     componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-        console.log('component updated')
+        // console.log('component updated')
         // debugger
      if(prevProps.status !== this.props.status) {
          this.setState({
@@ -38,7 +37,7 @@ class ProfileStatus extends React.Component<any, any> {
     }
 
     render(): React.ReactNode {
-        console.log('start')
+        // console.log('start')
         return (
             <div>
 

@@ -4,7 +4,6 @@ import  {reduxForm, Field} from "redux-form";
 const LoginForm = (props: any) => {
     return (
         <div>
-
             <form onSubmit={props.handleSubmit}>
                 <div>
                     {/*<input type="text" placeholder={'Login'}/>*/}
