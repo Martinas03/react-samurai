@@ -31,8 +31,6 @@ export type ActionTypes =
     AddPostPropsType
     | SetUsersProfileActionType
     | AddMessagePropsType
-    | UpdateNewPostTextPropsType
-    | UpdateNewMessageTextPropsType
     | FollowActionType
     | UnFollowActionType
     | SetUsersActionType
@@ -46,6 +44,7 @@ export type ActionTypes =
 
 export type AddPostPropsType = {
     type: 'ADD-POST'
+    post: string
 }
 
 export type SetUsersProfileActionType = {
@@ -58,20 +57,12 @@ export type AddMessagePropsType = {
     message: string
 }
 
-export type UpdateNewPostTextPropsType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newPost: string
-}
 
 export type SetStatusPropsType = {
     type: 'SET-STATUS'
     status: string
 }
 
-export type UpdateNewMessageTextPropsType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessageText: string
-}
 
 export type FollowActionType = ReturnType<typeof followSuccess>
 

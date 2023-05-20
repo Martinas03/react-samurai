@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler} from 'react';
+import React, {ChangeEvent} from 'react';
 
 class ProfileStatus extends React.Component<any, any> {
     state = {

@@ -2,18 +2,14 @@ import {
     ActionTypes,
     AddMessagePropsType,
     DialogsType,
-    MessagePageType,
     MessagesType,
-    UpdateNewMessageTextPropsType,
 } from "./state";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
 export type InitialStateType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
-    newMessageText: string
 }
 
 let initialStte: InitialStateType = {
@@ -50,7 +46,6 @@ let initialStte: InitialStateType = {
         {id: 2, message: 'How are your it?'},
         {id: 3, message: 'See you later'}
     ],
-    newMessageText: 'New message'
 }
 
 export const dialogsReducer = (state: InitialStateType = initialStte, action: ActionTypes): InitialStateType => {
@@ -62,16 +57,9 @@ export const dialogsReducer = (state: InitialStateType = initialStte, action: Ac
             }
             return {
                 ...state,
-                messages: [newMessage, ...state.messages],
-                newMessageText: ''
+                messages: [...state.messages, newMessage],
             }
 
-        }
-        case UPDATE_NEW_MESSAGE_TEXT : {
-            return {
-                ...state,
-                newMessageText: action.newMessageText
-            }
         }
         default:
             return state
@@ -80,7 +68,3 @@ export const dialogsReducer = (state: InitialStateType = initialStte, action: Ac
 
 export const addMessageActionCreator = (text: string): AddMessagePropsType => ({type: ADD_MESSAGE, message: text})
 
-export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextPropsType => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newMessageText: text
-})
