@@ -5,15 +5,17 @@ import Message from "./Message/Message";
 import {MessagePageType} from "../../redux/state";
 import {Redirect} from 'react-router-dom'
 import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
+import {Textarea} from "../comon/FormControls/FormControls";
 
 export const DialogsForm = (props: any) => {
-
+    const maxLength = maxLengthCreator(50)
     return (
         <form onSubmit={props.handleSubmit}>
-
             <div>
                 <Field name="message"
-                       component="textarea"
+                       component={Textarea}
+                       validate={[requiredField]}
                        type="text"
                        placeholder={'message'}
                 />
