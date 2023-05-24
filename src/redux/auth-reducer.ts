@@ -33,7 +33,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
                 email: action.data.email,
                 login: action.data.login,
                 // ...action.data,
-                isAuth: true
+                isAuth: action.data.isAuth
             }
         }
 
@@ -41,9 +41,9 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
             return state
     }
 }
-export const setUserData = (userId: number, login: string, email: string) => ({
+export const setUserData = (userId: number | any, login: string | any, email: string | any, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {userId, login, email}
+    data: {userId, login, email, isAuth}
 } as const)
 
 export const setLoginData = (login: string, email: string, checked: boolean) => ({
@@ -52,25 +52,35 @@ export const setLoginData = (login: string, email: string, checked: boolean) => 
 } as const)
 
 export const getAuth = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<any>) => {
         authAPI.getAuth()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data
-                    dispatch(setUserData(id, login, email))
+                    dispatch(setUserData(id, login, email, true))
 
                 }
             })
     }
 }
 
-export const getLogin = () => {
-    return (dispatch: Dispatch) => {
-        authAPI.getLogin()
+export const getLogin = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: Dispatch<any>) => {
+        authAPI.getLogin(email, password, rememberMe)
             .then(data => {
                 if (data.resultCode === 0) {
-                    let {id, email, login} = data.data
-                    dispatch(setUserData(id, login, email))
+                    dispatch(getAuth())
+                }
+            })
+    }
+}
+
+export const getLogout = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: Dispatch<any>) => {
+        authAPI.getLogout()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setUserData(null, null, null, false))
                 }
             })
     }

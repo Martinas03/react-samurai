@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import {AppStateType} from "../../redux/redux-store";
-import {getAuth, setUserData} from "../../redux/auth-reducer";
+import {getAuth, getLogout, setUserData} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 
 
@@ -17,7 +17,7 @@ class HeaderContainer extends React.Component<any> {
             console.log('You are not autorised')
         }
         return (
-            <Header {...this.props} isAuth={this.props.isAuth} login={this.props.login}/>
+            <Header {...this.props} isAuth={this.props.isAuth} login={this.props.login} logout={this.props.getLogout}/>
         )
     }
 
@@ -29,4 +29,4 @@ let mapStateToProps = (state: AppStateType) => ({
     login: state.auth.login
 })
 
-export default connect(mapStateToProps, {setUserData, getAuth}) (HeaderContainer)
+export default connect(mapStateToProps, {setUserData, getAuth, getLogout}) (HeaderContainer)

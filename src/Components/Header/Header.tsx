@@ -2,10 +2,12 @@ import React from "react";
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import user from './../../Assets/images/user.png'
+import {getLogout} from "../../redux/auth-reducer";
 
 type HeaderPropsType = {
     isAuth: boolean
     login: any
+    logout: any
 }
 
 const Header = (props: HeaderPropsType) => {
@@ -19,6 +21,11 @@ const Header = (props: HeaderPropsType) => {
                     <div className={s.avatarWrapper}>
                         <img src={user} alt="ava" className={s.img}/>
                         {props.login}
+                        <div>
+                            <button onClick={props.logout}>
+                                Logout
+                            </button>
+                        </div>
                     </div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
