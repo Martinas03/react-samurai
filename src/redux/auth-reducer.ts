@@ -21,7 +21,7 @@ export type InitialStateType = {
 }
 
 const SET_USER_DATA = 'SET_USER_DATA'
-const SET_LOGIN_DATA = 'SET_LOGIN_DATA'
+// const SET_LOGIN_DATA = 'SET_LOGIN_DATA'
 
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
