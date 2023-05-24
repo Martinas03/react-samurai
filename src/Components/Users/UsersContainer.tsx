@@ -10,8 +10,7 @@ import {
 import React from "react";
 import {UsersFC} from "./UsersFC";
 import Preloader from "../comon/preloader/Preloader";
-import WithAuthRedirect from "../hoc/WithAuthRedirect";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 
 
 // export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -25,16 +24,16 @@ type MapStatePropsType = {
     followingInProgress: Array<number>
 }
 
-type MapDispatchPropsType = {
-    setUsers: (users: UsersType[]) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    toggleFolowingProgress: (isFetching: boolean, userId: number) => void
-    getUsers: (currentPage: number, pageSize: number)=> (dispatch: Dispatch) => void
-    follow: (userId: number)=> (dispatch: Dispatch) => void
-    unfollow:  (userId: number)=> (dispatch: Dispatch) => void
-}
+// type MapDispatchPropsType = {
+//     setUsers: (users: UsersType[]) => void
+//     setCurrentPage: (currentPage: number) => void
+//     setTotalUsersCount: (totalCount: number) => void
+//     toggleIsFetching: (isFetching: boolean) => void
+//     toggleFolowingProgress: (isFetching: boolean, userId: number) => void
+//     getUsers: (currentPage: number, pageSize: number)=> (dispatch: Dispatch) => void
+//     follow: (userId: number)=> (dispatch: Dispatch) => void
+//     unfollow:  (userId: number)=> (dispatch: Dispatch) => void
+// }
 
 class UsersApiComponent extends React.Component<any> {
 
@@ -96,5 +95,5 @@ export default compose(
         follow,
         unfollow
     }),
-    WithAuthRedirect,
+    // WithAuthRedirect,
 ) (UsersApiComponent)

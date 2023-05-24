@@ -47,10 +47,10 @@ export const setUserData = (userId: number | any, login: string | any, email: st
     data: {userId, login, email, isAuth}
 } as const)
 
-export const setLoginData = (login: string, email: string, checked: boolean) => ({
-    type: SET_LOGIN_DATA,
-    data: {login, email, checked}
-} as const)
+// export const setLoginData = (login: string, email: string, checked: boolean) => ({
+//     type: SET_LOGIN_DATA,
+//     data: {login, email, checked}
+// } as const)
 
 export const getAuth = () => {
     return (dispatch: Dispatch<any>) => {
@@ -62,6 +62,7 @@ export const getAuth = () => {
 
                 }
             })
+        return 'Hello friends'
     }
 }
 
@@ -78,7 +79,9 @@ export const getLogin = (email: string, password: string, rememberMe: boolean) =
                     console.log(res.data.messages)
                 }
             })
+        // return 'Hello incubator'
     }
+
 }
 
 export const getLogout = (email: string, password: string, rememberMe: boolean) => {

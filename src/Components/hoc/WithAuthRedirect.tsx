@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
@@ -17,8 +17,8 @@ const WithAuthRedirect = (Component: any) => {
         }
     }
 
-    let RedirectComponentForConnect = connect(mapStateToPropsForRedirect)(RedirectComponent)
-    return RedirectComponentForConnect
+
+    return connect(mapStateToPropsForRedirect)(RedirectComponent)
 };
 
 export default WithAuthRedirect;

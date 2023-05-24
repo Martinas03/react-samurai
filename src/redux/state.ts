@@ -10,6 +10,7 @@ import {
     unFollowSuccess
 } from "./users-reducer";
 import {setUserData} from "./auth-reducer";
+import {initializedSuccess} from "./app-reducer";
 
 let _rerenderTree = () => {
     console.log('State changed')
@@ -40,6 +41,7 @@ export type ActionTypes =
     | SetUserDataActionType
     | ToggleFolowingProgressActionType
     | SetStatusPropsType
+    | InitializedSuccessActionType
 
 
 export type AddPostPropsType = {
@@ -63,6 +65,7 @@ export type SetStatusPropsType = {
     status: string
 }
 
+export type InitializedSuccessActionType = ReturnType<typeof initializedSuccess>
 
 export type FollowActionType = ReturnType<typeof followSuccess>
 
