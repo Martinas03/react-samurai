@@ -1,6 +1,7 @@
 import {ActionTypes} from "./state";
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {stopSubmit} from "redux-form";
 
 
 let initialState: InitialStateType = {
@@ -65,11 +66,16 @@ export const getAuth = () => {
 }
 
 export const getLogin = (email: string, password: string, rememberMe: boolean) => {
+
     return (dispatch: Dispatch<any>) => {
         authAPI.getLogin(email, password, rememberMe)
-            .then(data => {
-                if (data.resultCode === 0) {
+            .then(res => {
+                if (res.data.resultCode === 0) {
                     dispatch(getAuth())
+                } else {
+                    let message = res.data.messages.length > 0 ? res.data.messages[0] : ''
+                    dispatch(stopSubmit('login', {_error: message}))
+                    console.log(res.data.messages)
                 }
             })
     }

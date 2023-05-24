@@ -2,7 +2,6 @@ import React from "react";
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import user from './../../Assets/images/user.png'
-import {getLogout} from "../../redux/auth-reducer";
 
 type HeaderPropsType = {
     isAuth: boolean
@@ -14,7 +13,7 @@ const Header = (props: HeaderPropsType) => {
 
     return (
         <header className={s.header}>
-            <img src='https://seeklogo.com/images/H/hummingbird-logo-D436A31661-seeklogo.com.png' />
+            <img src='https://seeklogo.com/images/H/hummingbird-logo-D436A31661-seeklogo.com.png' alt={'Avatar'}/>
             <div className={s.loginBlock}>
                 {props.isAuth
                     ?
