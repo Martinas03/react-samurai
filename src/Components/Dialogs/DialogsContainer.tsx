@@ -7,6 +7,7 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import WithAuthRedirect from "../hoc/WithAuthRedirect";
+import {getMessageSelector} from "../../redux/dialogs-selectors";
 
 type MapStatePropsType = {
     messagesPage: InitialStateType
@@ -18,7 +19,7 @@ type MapDispatchPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        messagesPage: state.messagesPage,
+        messagesPage: getMessageSelector(state),
     }
 }
 

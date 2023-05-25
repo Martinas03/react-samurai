@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
     follow,
-    getUsers,
+    requestUsers,
     setCurrentPage,
     toggleFolowingProgress, unfollow,
     UsersType
@@ -11,6 +11,14 @@ import React from "react";
 import {UsersFC} from "./UsersFC";
 import Preloader from "../comon/preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selectors";
 
 
 // export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -64,12 +72,12 @@ class UsersApiComponent extends React.Component<any> {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        users: state.usersPage.users,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        totalUsersCount: getTotalUsersCount(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
@@ -91,7 +99,7 @@ export default compose(
     connect(mapStateToProps, {
         setCurrentPage,
         toggleFolowingProgress,
-        getUsers,
+        getUsers: requestUsers,
         follow,
         unfollow
     }),

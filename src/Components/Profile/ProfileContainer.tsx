@@ -6,6 +6,8 @@ import {AppStateType} from "../../redux/redux-store";
 import {withRouter} from 'react-router'
 import {Redirect} from 'react-router-dom'
 import WithAuthRedirect from "../hoc/WithAuthRedirect";
+import {getProfileSelector, getStatusSelector} from "../../redux/profile-selectors";
+import {getAutorizedUserIdSelector, getIsAuthSelector} from "../../redux/auth-selectors";
 // import {compose} from "redux";
 
 
@@ -33,10 +35,10 @@ class ProfileContiner extends React.Component<any> {
 }
 
 let mapStateToProps = (state: AppStateType) => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    isAuth: state.auth.isAuth,
-    autorizedUserId: state.auth.userId
+    profile: getProfileSelector(state),
+    status: getStatusSelector(state),
+    isAuth: getIsAuthSelector(state),
+    autorizedUserId: getAutorizedUserIdSelector(state)
 })
 // export default compose(
 //     connect(mapStateToProps, {getProfile}),
