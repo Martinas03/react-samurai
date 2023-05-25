@@ -18,6 +18,7 @@ import Login from "./Components/Login/Login";
 // import {withRouter} from "react-router";
 // import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
+import {getInitializedSelector} from "./redux/app-selectors";
 // import Preloader from "./Components/comon/preloader/Preloader";
 
 
@@ -62,7 +63,7 @@ class App extends React.Component<any> {
     }
 }
 let mapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.initialized,
+    initialized: getInitializedSelector(state),
 })
 // export default compose(
 //     withRouter,
