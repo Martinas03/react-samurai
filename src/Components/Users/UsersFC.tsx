@@ -3,7 +3,6 @@ import s from "./UsersFC.module.css";
 import userAvartar from "../../Assets/images/user.png";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {followAPI} from "../../api/api";
 
 type UsersFCType = {
     totalUsersCount: number
@@ -57,7 +56,7 @@ export const UsersFC = (props: UsersFCType) => {
                     <span>
                         <div>
                             <NavLink to={'profile/' + u.id}>
-                            <img className={s.img} src={u.photos.small != null ? u.photos.small : userAvartar}/>
+                            <img className={s.img} src={u.photos.small != null ? u.photos.small : userAvartar} alt={'avatar'}/>
                             </NavLink>
                         </div>
                         <div>

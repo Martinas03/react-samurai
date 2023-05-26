@@ -6,9 +6,8 @@ import {DialogsType} from "../../../redux/state";
 
 const DialogItem = (props: DialogsType) => {
     let path = '/dialogs/' + props.id
-    // @ts-ignore
     return <div className={s.dialogItems}>
-        <img src={props.avatar} className={s.img}/>
+        <img src={props.avatar} className={s.img} alt={'ava'} />
         <NavLink to={path}>{props.name}</NavLink>
         </div>
 }

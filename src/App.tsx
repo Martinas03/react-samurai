@@ -19,6 +19,7 @@ import Login from "./Components/Login/Login";
 // import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import {getInitializedSelector} from "./redux/app-selectors";
+import Preloader from "./Components/comon/preloader/Preloader";
 // import Preloader from "./Components/comon/preloader/Preloader";
 
 
@@ -37,9 +38,9 @@ class App extends React.Component<any> {
     }
 
     render() {
-        // if(!this.props.initialized) {
-        //     return <Preloader/>
-        // }
+        if(!this.props.initialized) {
+            return <Preloader/>
+        }
 
         let state = this.props.store.getState()
 

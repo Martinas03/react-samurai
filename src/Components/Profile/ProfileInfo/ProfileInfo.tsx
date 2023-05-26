@@ -1,8 +1,8 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
 import Preloader from "../../comon/preloader/Preloader";
-import ProfileStatus from  './ProfileStatus'
 import user from './../../../Assets/images/user.png'
+import {ProfileStatusFC} from "./ProfileStatusFC";
 
 type ProfileInfoPropsType = {
     profile: any
@@ -27,7 +27,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <h3>{props.profile.fullName}</h3>
 
                 <img src={props.profile.photos.small ?  props.profile.photos.small : user} alt="" className={s.userAva}/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusFC status={props.status} updateStatus={props.updateStatus}/>
 
                 <div>
                     <h4>About me: {props.profile.aboutMe}</h4>

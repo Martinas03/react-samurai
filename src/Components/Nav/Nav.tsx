@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Nav.module.css'
 import {NavLink} from "react-router-dom";
-import {FriendsType, SiteBarType, StateType} from "../../redux/state";
+import {FriendsType, SiteBarType} from "../../redux/state";
 
 type NavType = {
     siteBarBlock: SiteBarType

@@ -1,4 +1,4 @@
-import {ActionTypes, FriendsType, SiteBarType} from "./state";
+import {ActionTypes, FriendsType} from "./state";
 
 type IitialStateType = {
     title: string

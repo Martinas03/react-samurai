@@ -7,7 +7,7 @@ const Post = (props: PostsType) => {
     return (
         <div className={s.item}>
 
-            <img src='https://s2.afisha.ru/mediastorage/f8/40/44c361537e354921a5a5266240f8.jpg'/>
+            <img src='https://s2.afisha.ru/mediastorage/f8/40/44c361537e354921a5a5266240f8.jpg' alt={'user ava'}/>
             {props.message}
             <div className={s.likes}>
                <button>
