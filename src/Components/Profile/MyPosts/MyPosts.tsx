@@ -34,8 +34,8 @@ type PostsPropsType = {
 }
 
 
-const MyPosts = (props: PostsPropsType) => {
-
+const MyPosts = React.memo((props: PostsPropsType) => {
+    console.log('REACT')
     const onSubmit = (value: any) => {
         console.log(value.post)
         props.addPost(value.post)
@@ -54,6 +54,6 @@ const MyPosts = (props: PostsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 export default MyPosts

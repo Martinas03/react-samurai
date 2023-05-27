@@ -11,7 +11,7 @@ export const ProfileStatusFC = (props: ProfileStatusFCPropsType) => {
     let [status, setStatus] = useState(props.status)
 
     useEffect(() => {
-        debugger
+        // debugger
         setStatus(props.status)
     }, [props.status])
 
