@@ -1,9 +1,10 @@
 import {
     ActionTypes,
-    AddPostPropsType, SetUsersProfileActionType,
+    AddPostPropsType, DeletPostActionCreatorPropsType, SetUsersProfileActionType,
 } from "./state";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
+// import {Dispatch} from "redux";
 
 export type PostsType = {
     id: number
@@ -16,6 +17,7 @@ export type InitialStateType = typeof initialState
 const ADD_POST = 'ADD-POST'
 const SET_USERS_PROFILE = 'SET-USERS-PROFILE'
 const SET_STATUS = 'SET-STATUS'
+const DELETE_POST = 'DELETE_POST'
 
 let initialState = {
     posts: [
@@ -47,6 +49,9 @@ export const profileReducer = (state = initialState, action: ActionTypes): Initi
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+        case "DELETE_POST": {
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
+        }
 
         default:
             return state
@@ -56,12 +61,11 @@ export const profileReducer = (state = initialState, action: ActionTypes): Initi
 
 export const addPostActionCreator = (post: string): AddPostPropsType => ({type: ADD_POST, post})
 export const setUserProfile = (profile: any): SetUsersProfileActionType => ({type: SET_USERS_PROFILE, profile})
-
-
 export const setStatus = (status: string) => ({type: SET_STATUS, status})
+export const deletPostActionCreator = (postId: number): DeletPostActionCreatorPropsType => ({type: DELETE_POST, postId})
 
 export const getProfile = (userId: number) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<any>) => {
 
         profileAPI.getProfile(userId)
             .then(data => {
@@ -72,7 +76,7 @@ export const getProfile = (userId: number) => {
 }
 
 export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<any>) => {
         profileAPI.getStatus(userId)
             .then(data => {
                 dispatch(setStatus(data.data))

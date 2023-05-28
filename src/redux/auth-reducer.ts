@@ -4,6 +4,7 @@ import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
 
 
+
 let initialState: InitialStateType = {
     userId: null,
     login: null,

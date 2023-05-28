@@ -30,6 +30,7 @@ export type StoreType = {
 
 export type ActionTypes =
     AddPostPropsType
+    | DeletPostActionCreatorPropsType
     | SetUsersProfileActionType
     | AddMessagePropsType
     | FollowActionType
@@ -47,6 +48,11 @@ export type ActionTypes =
 export type AddPostPropsType = {
     type: 'ADD-POST'
     post: string
+}
+
+export type DeletPostActionCreatorPropsType = {
+    type: 'DELETE_POST'
+    postId: number
 }
 
 export type SetUsersProfileActionType = {
