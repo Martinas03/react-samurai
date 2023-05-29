@@ -21,7 +21,7 @@ export type InitialStateType = {
     checked: boolean
 }
 
-const SET_USER_DATA = 'SET_USER_DATA'
+const SET_USER_DATA = 'auth/SET_USER_DATA'
 // const SET_LOGIN_DATA = 'SET_LOGIN_DATA'
 
 
@@ -54,24 +54,20 @@ export const setUserData = (userId: number | any, login: string | any, email: st
 // } as const)
 
 export const getAuth = () => {
-    return (dispatch: Dispatch<any>) => {
-        authAPI.getAuth()
-            .then(data => {
+    return async (dispatch: Dispatch<any>) => {
+       let data = await authAPI.getAuth()
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data
                     dispatch(setUserData(id, login, email, true))
 
                 }
-            })
-        return 'Hello friends'
     }
 }
 
 export const getLogin = (email: string, password: string, rememberMe: boolean) => {
 
-    return (dispatch: Dispatch<any>) => {
-        authAPI.getLogin(email, password, rememberMe)
-            .then(res => {
+    return async (dispatch: Dispatch<any>) => {
+       let res = await authAPI.getLogin(email, password, rememberMe)
                 if (res.data.resultCode === 0) {
                     dispatch(getAuth())
                 } else {
@@ -79,20 +75,16 @@ export const getLogin = (email: string, password: string, rememberMe: boolean) =
                     dispatch(stopSubmit('login', {_error: message}))
                     console.log(res.data.messages)
                 }
-            })
-        // return 'Hello incubator'
     }
 
 }
 
 export const getLogout = (email: string, password: string, rememberMe: boolean) => {
-    return (dispatch: Dispatch<any>) => {
-        authAPI.getLogout()
-            .then(data => {
+    return async (dispatch: Dispatch<any>) => {
+       let data = await authAPI.getLogout()
                 if (data.resultCode === 0) {
                     dispatch(setUserData(null, null, null, false))
                 }
-            })
     }
 }
 

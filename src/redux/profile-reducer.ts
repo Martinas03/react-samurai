@@ -65,34 +65,28 @@ export const setStatus = (status: string) => ({type: SET_STATUS, status})
 export const deletPostActionCreator = (postId: number): DeletPostActionCreatorPropsType => ({type: DELETE_POST, postId})
 
 export const getProfile = (userId: number) => {
-    return (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<any>) => {
 
-        profileAPI.getProfile(userId)
-            .then(data => {
+       let data = await profileAPI.getProfile(userId)
                 dispatch(setUserProfile(data))
                 console.log(data)
-            })
     }
 }
 
 export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch<any>) => {
-        profileAPI.getStatus(userId)
-            .then(data => {
+    return async (dispatch: Dispatch<any>) => {
+       let data = await profileAPI.getStatus(userId)
                 dispatch(setStatus(data.data))
-            })
     }
 }
 
 export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
 
-        profileAPI.updateStatus(status)
-            .then(data => {
+       let data = await profileAPI.updateStatus(status)
                 if (data.resultCode === 0) {
                     dispatch(setStatus(status))
 
                 }
-            })
     }
 }
