@@ -6,7 +6,6 @@ export const getUsers = (state: AppStateType) => {
 }
 
 export const getUsersSuperSelector = createSelector(getUsers,(users) => {
-    debugger
     return users.filter(u => u)
 })
 
