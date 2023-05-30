@@ -1,0 +1,15 @@
+.selectedPage {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 1px;
+}
+
+.numbers span {
+    padding: 3px;
+    color: #3644d9;
+}

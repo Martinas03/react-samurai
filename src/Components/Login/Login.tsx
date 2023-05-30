@@ -1,6 +1,6 @@
 import React from 'react';
-import {reduxForm, Field} from "redux-form";
-import {Input} from "../comon/FormControls/FormControls";
+import {reduxForm} from "redux-form";
+import {createdField, Input} from "../comon/FormControls/FormControls";
 import {requiredField} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {getLogin} from "../../redux/auth-reducer";
@@ -8,30 +8,34 @@ import {AppStateType} from "../../redux/redux-store";
 import {Redirect} from 'react-router-dom'
 import s from './../comon/FormControls/FormControls.module.css'
 
-const LoginForm = (props: any) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
         <div>
-            <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field name="email"
-                           component={Input}
-                           validate={[requiredField]}
-                           type="text"
-                           placeholder={'email'}/>
-                </div>
-                <div>
-                    <Field name="password"
-                           component={Input}
-                           validate={[requiredField]}
-                           type="password"
-                           placeholder={'Password'}/>
-                </div>
-                <div>
-                    <Field name="rememberMe" component={Input} type="checkbox"/>
-                    remember me
-                </div>
-                {props.error && <div className={s.formSummaryError}>
-                    {props.error}
+            <form onSubmit={handleSubmit}>
+                {createdField("email", Input, [requiredField], 'email')}
+                {/*<div>*/}
+                {/*    <Field name="email"*/}
+                {/*           component={Input}*/}
+                {/*           validate={[requiredField]}*/}
+                {/*           type="text"*/}
+                {/*           placeholder={'email'}/>*/}
+                {/*</div>*/}
+                {createdField("password", Input, [requiredField], 'Password', {type: 'password'}) }
+
+                {/*<div>*/}
+                {/*    <Field name="password"*/}
+                {/*           component={Input}*/}
+                {/*           validate={[requiredField]}*/}
+                {/*           type="password"*/}
+                {/*           placeholder={'Password'}/>*/}
+                {/*</div>*/}
+                {createdField("rememberMe", Input, [], '', {type: 'checkbox'}, 'remember me') }
+                {/*<div>*/}
+                {/*    <Field name="rememberMe" component={Input} type="checkbox"/>*/}
+                {/*    remember me*/}
+                {/*</div>*/}
+                {error && <div className={s.formSummaryError}>
+                    {error}
                 </div>}
                 <div>
                     <button>Login</button>

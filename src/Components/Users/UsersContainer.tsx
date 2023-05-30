@@ -17,12 +17,8 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    // getUsers,
     getUsersSuperSelector
 } from "../../redux/users-selectors";
-
-
-// export type MapsPropsType = MapStatePropsType & MapDispatchPropsType
 
 type MapStatePropsType = {
     users: UsersType[]
@@ -33,25 +29,16 @@ type MapStatePropsType = {
     followingInProgress: Array<number>
 }
 
-// type MapDispatchPropsType = {
-//     setUsers: (users: UsersType[]) => void
-//     setCurrentPage: (currentPage: number) => void
-//     setTotalUsersCount: (totalCount: number) => void
-//     toggleIsFetching: (isFetching: boolean) => void
-//     toggleFolowingProgress: (isFetching: boolean, userId: number) => void
-//     getUsers: (currentPage: number, pageSize: number)=> (dispatch: Dispatch) => void
-//     follow: (userId: number)=> (dispatch: Dispatch) => void
-//     unfollow:  (userId: number)=> (dispatch: Dispatch) => void
-// }
-
-class UsersApiComponent extends React.Component<any> {
+class UsersApiComponent extends React.Component<any, any> {
 
     componentDidMount(): void {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsers(pageNumber, pageSize)
     }
 
     render(): React.ReactNode {
@@ -82,19 +69,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-// compose(
-//     connect(mapStateToProps, {
-//         setCurrentPage,
-//         toggleFolowingProgress,
-//         getUsers,
-//         follow,
-//         unfollow
-//     }),
-//     WithAuthRedirect,
-// ) (UsersApiComponent)
-//
-// let AuthRedirectComponent: any = WithAuthRedirect(UsersApiComponent)
-
 
 export default compose(
     connect(mapStateToProps, {
@@ -104,5 +78,4 @@ export default compose(
         follow,
         unfollow
     }),
-    // WithAuthRedirect,
 ) (UsersApiComponent)

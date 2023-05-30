@@ -12,3 +12,8 @@
     width: 101px;
 }
 
+.job {
+    display: flex;
+    flex-direction: row;
+}
+

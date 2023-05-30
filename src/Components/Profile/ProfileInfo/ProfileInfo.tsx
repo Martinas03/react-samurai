@@ -4,42 +4,37 @@ import Preloader from "../../comon/preloader/Preloader";
 import user from './../../../Assets/images/user.png'
 import {ProfileStatusFC} from "./ProfileStatusFC";
 
-type ProfileInfoPropsType = {
-    profile: any
-    status: string
-    updateStatus: any
-}
+// type ProfileInfoPropsType = {
+//     profile: any
+//     status: string
+//     updateStatus: any
+// }
 
-const ProfileInfo = (props: ProfileInfoPropsType) => {
+const ProfileInfo = ({profile, status, updateStatus}) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader/>
     }
 
     return (
-        <div className={s.profileInfo}>
-            {/*<div>*/}
-            {/*    <img className={s.img}*/}
-            {/*         src='https://avatars.mds.yandex.net/i?id=b6d509c16aa7ec3b9c5281d960c5bfef-5258986-images-thumbs&n=13'/>*/}
-            {/*</div>*/}
+        <div>
+                <div className={s.ava}>
+                <h3>{profile.fullName}</h3>
 
-            <div className={s.ava}>
-                <h3>{props.profile.fullName}</h3>
-
-                <img src={props.profile.photos.small ?  props.profile.photos.small : user} alt="" className={s.userAva}/>
-                <ProfileStatusFC status={props.status} updateStatus={props.updateStatus}/>
+                <img src={profile.photos.small ?  profile.photos.small : user} alt="" className={s.userAva}/>
+                <ProfileStatusFC status={status} updateStatus={updateStatus}/>
 
                 <div>
-                    <h4>About me: {props.profile.aboutMe}</h4>
+                    <h4>About me: {profile.aboutMe}</h4>
                     <h4>Contacts</h4>
-                    <p>facebook: <a href={props.profile.contacts.facebook}>{props.profile.contacts.facebook}</a></p>
-                    <p>vk: <a href={props.profile.contacts.vk}>{props.profile.contacts.vk}</a></p>
-                    <p>twitter: <a href={props.profile.contacts.twitter}>{props.profile.contacts.twitter}</a></p>
-                    <p>instagram: <a href={props.profile.contacts.instagram}>{props.profile.contacts.instagram}</a></p>
+                    <p>facebook: <a href={profile.contacts.facebook}>{profile.contacts.facebook}</a></p>
+                    <p>vk: <a href={profile.contacts.vk}>{profile.contacts.vk}</a></p>
+                    <p>twitter: <a href={profile.contacts.twitter}>{profile.contacts.twitter}</a></p>
+                    <p>instagram: <a href={profile.contacts.instagram}>{profile.contacts.instagram}</a></p>
                 </div>
-                <div>
+                <div className={s.job}>
                     <h4>looking for a job:</h4>
-                    {props.profile.contacts.lookingForAJob ?
+                    {profile.contacts.lookingForAJob ?
                     <img className={s.profileImg}
                          src={'https://freepngimg.com/thumb/green_tick/27890-7-green-tick-picture.png'} alt={''}/>
                     : <img className={s.profileImg}

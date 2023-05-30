@@ -57,7 +57,7 @@ export const dialogsReducer = (state: InitialStateType = initialStte, action: Ac
             }
             return {
                 ...state,
-                messages: [...state.messages, newMessage],
+                messages: [newMessage, ...state.messages],
             }
 
         }
