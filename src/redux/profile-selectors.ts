@@ -8,6 +8,9 @@ export const getStatusSelector = (state: AppStateType) => {
     return state.profilePage.status
 }
 
+// export const getPhotosSelector = (state: AppStateType) => {
+//     return state.profilePage.profile.photos
+// }
 // export const getPageSize = (state: AppStateType) => {
 //     return state.usersPage.pageSize
 // }

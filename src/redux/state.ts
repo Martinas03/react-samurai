@@ -43,6 +43,7 @@ export type ActionTypes =
     | ToggleFolowingProgressActionType
     | SetStatusPropsType
     | InitializedSuccessActionType
+    | SetPhotoSuccessActionCreatorPropsType
 
 
 export type AddPostPropsType = {
@@ -53,6 +54,11 @@ export type AddPostPropsType = {
 export type DeletPostActionCreatorPropsType = {
     type: 'DELETE_POST'
     postId: number
+}
+
+export type SetPhotoSuccessActionCreatorPropsType = {
+    type: 'SET_PHOTO_SUCCESS'
+    photos: any
 }
 
 export type SetUsersProfileActionType = {
@@ -117,6 +123,7 @@ export type ProfilePageType = {
     newPostText: string
     profile: any
     status: string
+
 }
 
 export type PostsType = {
@@ -189,7 +196,8 @@ let store: StoreType = {
             ],
             newPostText: 'It-kamasutra',
             profile: null,
-            status: ''
+            status: '',
+
         },
         siteBar: {
             title: 'Friends',

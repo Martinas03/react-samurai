@@ -10,18 +10,23 @@ import {ProfileStatusFC} from "./ProfileStatusFC";
 //     updateStatus: any
 // }
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
 
     if (!profile) {
         return <Preloader/>
     }
-
+    const onSavePhoto = (e) => {
+        if(e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
+    }
     return (
         <div>
                 <div className={s.ava}>
                 <h3>{profile.fullName}</h3>
 
                 <img src={profile.photos.small ?  profile.photos.small : user} alt="" className={s.userAva}/>
+                    {isOwner && <input type={'file'} onChange={onSavePhoto}/>}
                 <ProfileStatusFC status={status} updateStatus={updateStatus}/>
 
                 <div>
