@@ -55,7 +55,6 @@ let mapStateToProps = (state: AppStateType) => ({
     status: getStatusSelector(state),
     isAuth: getIsAuthSelector(state),
     autorizedUserId: getAutorizedUserIdSelector(state),
-    // photos: getPhotosSelector(state)
 })
 // export default compose(
 //     connect(mapStateToProps, {getProfile}),
