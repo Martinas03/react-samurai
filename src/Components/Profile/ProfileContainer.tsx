@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfile, getStatus, savePhoto, updateStatus} from "../../redux/profile-reducer";
+import {getProfile, getStatus, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {withRouter} from 'react-router'
 import {Redirect} from 'react-router-dom'
@@ -33,7 +33,6 @@ class ProfileContiner extends React.Component<any, any> {
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<{}>, snapshot?: any): void {
         if(this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
-            // this.props.savePhoto(this.props.photos)
         }
     }
 
@@ -46,6 +45,7 @@ class ProfileContiner extends React.Component<any, any> {
                      updateStatus={this.props.updateStatus}
                      isOwner={!this.props.match.params.userId}
                      savePhoto={this.props.savePhoto}
+                     saveProfile={this.props.saveProfile}
             />
         )
     }
@@ -66,5 +66,5 @@ let AuthRedirectComponent: any = WithAuthRedirect(ProfileContiner)
 
 let withRouterDataUrl: any = withRouter(AuthRedirectComponent)
 
-export default connect(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto})(withRouterDataUrl)
+export default connect(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto, saveProfile})(withRouterDataUrl)
 

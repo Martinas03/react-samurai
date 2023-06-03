@@ -47,7 +47,14 @@ export const profileAPI = {
             .then(res => {
                 return res.data
             })
+    },
+    saveProfile(profile: any) {
+        return instance.put('profile', profile)
+            .then(res => {
+                return res.data
+            })
     }
+
 }
 
 export const followAPI = {

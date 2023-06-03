@@ -6,9 +6,6 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import {AppStateType, StoreType} from "./redux/redux-store";
-// import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-// import UsersContainer from "./Components/Users/UsersContainer";
-// import ProfileContiner from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import {connect} from "react-redux";
 import Login from "./Components/Login/Login";
@@ -23,10 +20,6 @@ const DialogsContainer = lazy( () => import("./Components/Dialogs/DialogsContain
 
 export type AppPropsType = {
     store: StoreType
-    // addPost: ()=> void
-    // addMessage: (message: string)=> void
-    // updateNewPostText: (text: string)=> void
-    // updateNewMessageText:(text: string)=> void
 }
 
 class App extends React.Component<any, any> {
