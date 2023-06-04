@@ -26,7 +26,10 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
 
     const onSubmit = (formData: any) => {
         saveProfile(formData)
-        setEditMode(false)
+            .then(()=> {
+                setEditMode(false)
+            })
+
         // props.getLogin(formData.email, formData.password, formData.rememberMe)
     }
     return (
@@ -42,11 +45,6 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
                     : <ProfileData goToEditeMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>  }
 
             </div>
-            {/*<h4>Contacts</h4>*/}
-            {/*<p>facebook: <a href={profile.contacts.facebook}>{profile.contacts.facebook}</a></p>*/}
-            {/*<p>vk: <a href={profile.contacts.vk}>{profile.contacts.vk}</a></p>*/}
-            {/*<p>twitter: <a href={profile.contacts.twitter}>{profile.contacts.twitter}</a></p>*/}
-            {/*<p>instagram: <a href={profile.contacts.instagram}>{profile.contacts.instagram}</a></p>*/}
         </div>
     )
 }

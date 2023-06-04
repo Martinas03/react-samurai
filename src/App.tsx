@@ -1,7 +1,7 @@
 import React, {lazy} from "react";
 import './App.css';
 import Nav from "./Components/Nav/Nav";
-import {BrowserRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -34,7 +34,7 @@ class App extends React.Component<any, any> {
         let state = this.props.store.getState()
 
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <div className='app-wrapper'>
                     <HeaderContainer/>
                     <Nav siteBarBlock={state.siteBar}/>
@@ -48,7 +48,7 @@ class App extends React.Component<any, any> {
                         <Route path={'/login'} render={() => <Login/>}/>
                     </div>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }

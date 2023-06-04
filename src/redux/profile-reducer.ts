@@ -4,6 +4,7 @@ import {
 } from "./state";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {stopSubmit} from "redux-form";
 // import {Dispatch} from "redux";
 
 export type PostsType = {
@@ -111,6 +112,11 @@ export const saveProfile = (profile) => {
         let data = await profileAPI.saveProfile(profile)
         if (data.resultCode === 0) {
             dispatch(getProfile(userId))
+        } else {
+            let message = data.messages.length > 0 ? data.messages[0] : ''
+            dispatch(stopSubmit('edit-profile', {_error: message}))
+            // console.log(data.messages)
+            return Promise.reject(message)
         }
     }
 }
