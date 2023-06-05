@@ -1,6 +1,9 @@
 import {
     ActionTypes,
-    AddPostPropsType, DeletPostActionCreatorPropsType, SetPhotoSuccessActionCreatorPropsType, SetUsersProfileActionType,
+    AddPostPropsType,
+    DeletPostActionCreatorPropsType,
+    SetPhotoSuccessActionCreatorPropsType,
+    SetUsersProfileActionType,
 } from "./state";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
@@ -114,7 +117,15 @@ export const saveProfile = (profile) => {
             dispatch(getProfile(userId))
         } else {
             let message = data.messages.length > 0 ? data.messages[0] : ''
-            dispatch(stopSubmit('edit-profile', {_error: message}))
+            const parsedString = data.messages[0]
+                .split(' ')[3].split('->')[1].replace(')','')
+            // const contactTitle = parsedString[3].split('->')[1].replace(')','')
+            const changedWord = parsedString.charAt(0).toLowerCase() + parsedString.slice(1)
+            // if(toString === 'mainlink') {
+            //     return 'mainLink'
+            // }
+            console.log(changedWord)
+            dispatch(stopSubmit('edit-profile', {'contacts': {[changedWord]: data.messages[0]}}))
             // console.log(data.messages)
             return Promise.reject(message)
         }

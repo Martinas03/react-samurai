@@ -26,9 +26,9 @@ export const profileAPI = {
     },
     getStatus(userId: number) {
         return instance.get('profile/status/' + userId)
-            // .then(res => {
-            //     return res.data
-            // })
+        // .then(res => {
+        //     return res.data
+        // })
     },
     updateStatus(status: string) {
         return instance.put('profile/status', {status})
@@ -59,16 +59,16 @@ export const profileAPI = {
 
 export const followAPI = {
     getUnfollow(userId: number) {
-       return  instance.delete(`follow/` + userId)
-           .then(res => {
-               return res.data
-           })
+        return instance.delete(`follow/` + userId)
+            .then(res => {
+                return res.data
+            })
     },
     getFollow(userId: number) {
-       return  instance.post(`follow/` + userId, {})
-           .then(res => {
-               return res.data
-           })
+        return instance.post(`follow/` + userId, {})
+            .then(res => {
+                return res.data
+            })
     },
 }
 
@@ -79,11 +79,11 @@ export const authAPI = {
                 return res.data
             })
     },
-    getLogin(email: string, password: string, rememberMe = false) {
-        return instance.post(`auth/login/`, {email, password, rememberMe})
-            // .then(res => {
-            //     return res.data
-            // })
+    getLogin(email: string, password: string, rememberMe = false, captcha = null) {
+        return instance.post(`auth/login/`, {email, password, rememberMe, captcha})
+        // .then(res => {
+        //     return res.data
+        // })
     },
     getLogout() {
         return instance.delete(`auth/login/`)
@@ -91,5 +91,13 @@ export const authAPI = {
                 return res.data
             })
     }
+}
 
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url')
+            // .then(res => {
+            //     return res.data
+            // })
+    }
 }

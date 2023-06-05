@@ -9,7 +9,7 @@ import {
     toggleIsFetching,
     unFollowSuccess
 } from "./users-reducer";
-import {setUserData} from "./auth-reducer";
+import {getCapchaUrlSuccess, setUserData} from "./auth-reducer";
 import {initializedSuccess} from "./app-reducer";
 
 let _rerenderTree = () => {
@@ -36,6 +36,7 @@ export type ActionTypes =
     | FollowActionType
     | UnFollowActionType
     | SetUsersActionType
+    | GetCapchaUrlSuccessActionType
     | SetCurrentPageActionType
     | SetTotalUsersCountActionType
     | ToggleIsFetchingActionType
@@ -92,6 +93,8 @@ export type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 export type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 
 export type SetUserDataActionType = ReturnType<typeof setUserData>
+
+export type GetCapchaUrlSuccessActionType = ReturnType<typeof getCapchaUrlSuccess>
 
 export type ToggleFolowingProgressActionType = ReturnType<typeof toggleFolowingProgress>
 

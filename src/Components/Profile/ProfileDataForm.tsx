@@ -2,6 +2,7 @@ import React from 'react';
 import {createdField, Input, Textarea} from "../comon/FormControls/FormControls";
 import {reduxForm} from "redux-form";
 import s from './ProfileInfo/ProfileInfo.module.css'
+import {requiredField} from "../../utils/validators/validators";
 
 const ProfileDataForm = ({handleSubmit ,profile, error}) => {
     return (
@@ -13,17 +14,17 @@ const ProfileDataForm = ({handleSubmit ,profile, error}) => {
                 </div>}
                 <div>
                     <b>About me</b>:
-                    {createdField('aboutMe', Textarea, [], 'About me')}
+                    {createdField('aboutMe', Textarea, [requiredField], 'About me')}
                 </div>
 
                 <div className={s.job}>
                     <b>Looking for a job:</b>: {createdField('lookingForAJob', Input, [], '', {type: 'checkbox'})}
                 </div>
                 <div>
-                    <b>Name</b>: {createdField('fullName', Input, [], 'My name')}
+                    <b>Name</b>: {createdField('fullName', Input, [requiredField], 'My name')}
                 </div>
                 <div>
-                    <b>Professional skills</b>:  {createdField('lookingForAJobDescription', Textarea, [], 'My professional skills')}
+                    <b>Professional skills</b>:  {createdField('lookingForAJobDescription', Textarea, [requiredField], 'My professional skills')}
                 </div>
                 <div>
                     <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {

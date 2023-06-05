@@ -50,7 +50,9 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
 }
 
 export const Contacts = ({contactTitle, contactValue}) => {
-    return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
+    return <div className={s.contact}><b>{contactTitle}</b>:
+       <a href={`http://${contactTitle}.com`}>{contactValue || `http://${contactTitle}.com`}</a>
+            </div>
 }
 
 const ProfileData = ({profile, isOwner, goToEditeMode}) => {
