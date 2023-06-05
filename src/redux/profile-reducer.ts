@@ -92,10 +92,15 @@ export const getStatus = (userId: number) => {
 
 export const updateStatus = (status: string) => {
     return async (dispatch: Dispatch) => {
-        let data = await profileAPI.updateStatus(status)
-        if (data.resultCode === 0) {
-            dispatch(setStatus(status))
+        try {
+            let data = await profileAPI.updateStatus(status)
+            if (data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        } catch (e) {
+            console.log(e)
         }
+
     }
 }
 

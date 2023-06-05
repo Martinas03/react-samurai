@@ -1,7 +1,7 @@
 import React, {lazy} from "react";
 import './App.css';
 import Nav from "./Components/Nav/Nav";
-import {HashRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -13,6 +13,7 @@ import {initializeApp} from "./redux/app-reducer";
 import {getInitializedSelector} from "./redux/app-selectors";
 import Preloader from "./Components/comon/preloader/Preloader";
 import WithSuspense from "./Components/hoc/WithSuspense";
+import {Switch, Redirect} from 'react-router-dom'
 
 const ProfileContiner = lazy( () => import("./Components/Profile/ProfileContainer"));
 const UsersContainer = lazy( () => import( "./Components/Users/UsersContainer"));
@@ -23,8 +24,17 @@ export type AppPropsType = {
 }
 
 class App extends React.Component<any, any> {
+
+    catchAllUnhandleErrors = (promiseRejectionEvent) => {
+        alert('some error')
+    }
     componentDidMount(): void {
         this.props.initializeApp()
+        window.addEventListener("unhandledrejection", this.catchAllUnhandleErrors)
+    }
+
+    componentWillUnmount(): void {
+        window.addEventListener("unhandledrejection", this.catchAllUnhandleErrors)
     }
 
     render() {
@@ -34,21 +44,25 @@ class App extends React.Component<any, any> {
         let state = this.props.store.getState()
 
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <div className='app-wrapper'>
                     <HeaderContainer/>
                     <Nav siteBarBlock={state.siteBar}/>
                     <div className='app-wrapper-content'>
-                        <Route path={'/dialogs'} render={WithSuspense(DialogsContainer)}/>
-                        <Route path={'/profile/:userId?'} render={WithSuspense(ProfileContiner)}/>
-                        <Route path={'/users'} render={WithSuspense(UsersContainer)}/>
-                        <Route path={'/news'} render={() => <News/>}/>
-                        <Route path={'/music'} render={() => <Music/>}/>
-                        <Route path={'/settings'} render={() => <Settings/>}/>
-                        <Route path={'/login'} render={() => <Login/>}/>
+                        <Switch>
+                            {/*<Route path={'/'} render={() => <Redirect to={'/profile'}/> }/>*/}
+                            <Route path={'/dialogs'} render={WithSuspense(DialogsContainer)}/>
+                            <Route path={'/profile/:userId?'} render={WithSuspense(ProfileContiner)}/>
+                            <Route path={'/users'} render={WithSuspense(UsersContainer)}/>
+                            <Route path={'/news'} render={() => <News/>}/>
+                            <Route path={'/music'} render={() => <Music/>}/>
+                            <Route path={'/settings'} render={() => <Settings/>}/>
+                            <Route path={'/login'} render={() => <Login/>}/>
+                            <Route path={'*'} render={() => <div>404 NOT FOUND</div> }/>
+                        </Switch>
                     </div>
                 </div>
-            </HashRouter>
+            </BrowserRouter>
         );
     }
 }
